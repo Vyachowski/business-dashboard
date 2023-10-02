@@ -11,7 +11,7 @@ coverage
 # Benchmarking
 benchmarks/graphs
 
-# React
+# React and other
 .DS_STORE
 node_modules
 scripts/flow/*/.flowconfig

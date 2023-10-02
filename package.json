@@ -1,0 +1,33 @@
+{
+  "name": "small-business-dashboard",
+  "version": "1.0.0",
+  "description": "A dashboard for small business with a PPC and SEO marketing channels",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "dev": "concurrently \"cd server && npm run dev-start\" \"cd client && npm run start\"",
+    "start": "cd server && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "postinstall": "npm run client-install && npm run server-install",
+    "client-build": "cd client && npm run clean && npm run build",
+    "server-build": "cd server && npm run clean && npm run build",
+    "build": "npm run client-build && npm run server-build"
+  },
+  "keywords": [
+    "full-stack-javascript",
+    "business-dashboard"
+  ],
+  "author": "Slava Haikin",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3"
+  }
+}
