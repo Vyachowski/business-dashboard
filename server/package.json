@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "A server part of dashboard for small business with a PPC and SEO marketing channels",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2"
   }
 }
