@@ -14,6 +14,11 @@
 
 ### To-do List
 
+#### Design
+- [ ] Dashboard template
+- [ ] Sign in/Sign up pages
+- [ ] Inner pages
+
 #### Backend
 ###### Authentication
 - [ ] User registration via email
@@ -21,8 +26,8 @@
 ###### Income endpoint
 - [ ] Backend part with income an income endpoint (total and daily)
 ###### Connectors to third-party API
-- [ ] Backend part with creating connectors to yandex metrics
-- [ ] Backend part with creating connectors to yandex direct
+- [ ] Backend part with creating connectors to Yandex Metrics
+- [ ] Backend part with creating connectors to Yandex Direct
 
 #### Frontend
 ###### Registration and logging in
