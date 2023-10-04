@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Sidebar from './components/Sidebar'
+import TopMenu from "./components/TopMenu";
+import InsightsArea from "./components/InsightsArea";
+import Card from "./components/Card";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Sidebar />
+      <TopMenu />
+      <InsightsArea>
+        <section>
+          <h2 className={'title'}>Goals overview</h2>
+          <Card name={'Yearly Goals'} bodyContent={'aaa'} footerContent={'aaa'} />
+        </section>
+      </InsightsArea>
     </div>
   );
 }
