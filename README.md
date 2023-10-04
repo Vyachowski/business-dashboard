@@ -10,6 +10,7 @@
 - Connectors to Universal Analytics and Yandex Metrics
 - Connectors to Yandex Direct and Google Ads
 - All key metrics on one screen
+- Option to add your insight and tasks for it
 
 ### To-do List
 
