@@ -15,8 +15,8 @@
 ### To-do List
 
 #### Design
-- [ ] Dashboard template
-- [ ] Sign in/Sign up pages
+- [x] Dashboard template
+- [x] Sign in/Sign up pages
 - [ ] Inner pages
 
 #### Backend
