@@ -24,16 +24,16 @@
 - [ ] User registration via email
 - [ ] User login
 ###### Income endpoint
-- [ ] Backend part with income an income endpoint (total and daily)
+- [x] Backend part with income an income endpoint (total and daily)
 ###### Connectors to third-party API
-- [ ] Backend part with creating connectors to Yandex Metrics
-- [ ] Backend part with creating connectors to Yandex Direct
+- [ ] Create connector to Yandex Metrics
+- [ ] Create connector to Yandex Direct
 
 #### Frontend
 ###### Registration and logging in
-- [ ] Welcome page
-- [ ] Registration modal window
-- [ ] Logging-in modal window
+- [ ] Create welcome page
+- [ ] Create sign-up page
+- [ ] Create sign-in page
 ###### Main page
 - [ ] Dashboard page
 ###### Analytics pages
