@@ -13,7 +13,6 @@ benchmarks/graphs
 
 # React and other
 .DS_STORE
-node_modules
 scripts/flow/*/.flowconfig
 .flowconfig
 *~
@@ -38,6 +37,8 @@ chrome-user-data
 *.swp
 *.swo
 .env
+*.sqlite
+*.db
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
