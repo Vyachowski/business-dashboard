@@ -21,28 +21,30 @@
 
 #### Backend
 ###### Authentication
-- [ ] User registration via email
-- [ ] User login
+- [x] User registration via email/password
+- [x] User login
+- [x] Create and refresh access token
 ###### Income endpoint
-- [x] Backend part with income an income endpoint (total and daily)
+- [x] Add income (defined period of time)
+- [x] Get income data (total and daily)
 ###### Connectors to third-party API
 - [ ] Create connector to Yandex Metrics
 - [ ] Create connector to Yandex Direct
 
 #### Frontend
 ###### Registration and logging in
-- [ ] Create welcome page
-- [ ] Create sign-up page
-- [ ] Create sign-in page
+- [ ] Create welcome page (Desktop)
+- [ ] Create sign-up page (Desktop)
+- [ ] Create sign-in page (Desktop)
 ###### Main page
-- [ ] Dashboard page
+- [ ] Dashboard page (Desktop)
 ###### Analytics pages
-- [ ] Insights page
-- [ ] Tasks page
-- [ ] SEO traffic page
-- [ ] PPC traffic page
+- [ ] Insights page (Desktop)
+- [ ] Tasks page (Desktop)
+- [ ] SEO traffic page (Desktop)
+- [ ] PPC traffic page (Desktop)
 ###### Entry form
-- [ ] Income entry page with a form to post data
+- [ ] Income entry page with a form to post data (Desktop)
 
 ## Branch Naming Convention
 
