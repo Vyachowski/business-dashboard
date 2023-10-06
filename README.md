@@ -28,8 +28,7 @@
 - [x] Add income (defined period of time)
 - [x] Get income data (total and daily)
 ###### Connectors to third-party API
-- [ ] Create connector to Yandex Metrics
-- [ ] Create connector to Yandex Direct
+- [ ] Create connector to Yandex ID API (and Metric and Direct inside)
 
 #### Frontend
 ###### Registration and logging in
