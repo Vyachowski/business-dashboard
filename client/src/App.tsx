@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Overview from './pages/Dashboard/Overview';
 import TaskList from './pages/Task/TaskList';
-import FormLayout from './pages/Form/FormLayout';
+import DataAddition from './pages/ManualDataEntry/DataAddition';
 import ErrorPage from './pages/Pages/ErrorPage';
 import ResetPassword from './pages/Authentication/ResetPassword';
 import SignIn from './pages/Authentication/SignIn';
@@ -46,11 +46,11 @@ function App() {
             }
           />
           <Route
-            path="/forms/form-layout"
+            path="/manual-entry/data-addition"
             element={
               <>
-                <PageTitle title="Form Layout | Insightful - Valuable ideas from your marketing data" />
-                <FormLayout />
+                <PageTitle title="Data addition | Insightful - Valuable ideas from your marketing data" />
+                <DataAddition />
               </>
             }
           />
