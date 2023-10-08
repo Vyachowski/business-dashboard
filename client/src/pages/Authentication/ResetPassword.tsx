@@ -19,8 +19,8 @@ const ResetPassword: React.FC = () => {
               </Link>
 
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+                A platform for small businesses to discover
+                valuable insights within their marketing data.
               </p>
 
               <span className="mt-15 inline-block">
