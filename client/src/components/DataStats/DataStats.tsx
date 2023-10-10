@@ -5,9 +5,9 @@ const DataStats = () => {
         <div className="flex items-center justify-center gap-2 border-b border-stroke pb-5 dark:border-strokedark xl:border-b-0 xl:border-r xl:pb-0">
           <div>
             <h4 className="mb-0.5 text-xl font-semibold text-black dark:text-white md:text-title-lg">
-              $4,350
+              450 Rub
             </h4>
-            <p className="text-sm font-medium">Unique Visitors</p>
+            <p className="text-sm font-medium">Lead Cost</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -28,9 +28,9 @@ const DataStats = () => {
         <div className="flex items-center justify-center gap-2 border-b border-stroke pb-5 dark:border-strokedark xl:border-b-0 xl:border-r xl:pb-0">
           <div>
             <h4 className="mb-0.5 text-xl font-semibold text-black dark:text-white md:text-title-lg">
-              55.9K
+              300 Rub
             </h4>
-            <p className="text-sm font-medium">Total Pageviews</p>
+            <p className="text-sm font-medium">Lead revenue</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -45,15 +45,15 @@ const DataStats = () => {
                 fill="#10B981"
               />
             </svg>
-            <span className="text-meta-3">25%</span>
+            <span className="text-meta-3">4%</span>
           </div>
         </div>
         <div className="flex items-center justify-center gap-2 border-b border-stroke pb-5 dark:border-strokedark sm:border-b-0 sm:pb-0 xl:border-r">
           <div>
             <h4 className="mb-0.5 text-xl font-semibold text-black dark:text-white md:text-title-lg">
-              54%
+              3.7 %
             </h4>
-            <p className="text-sm font-medium">Bounce Rate</p>
+            <p className="text-sm font-medium">Website conversion</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -74,9 +74,9 @@ const DataStats = () => {
         <div className="flex items-center justify-center gap-2">
           <div>
             <h4 className="mb-0.5 text-xl font-semibold text-black dark:text-white md:text-title-lg">
-              2m 56s
+              2.3 pos
             </h4>
-            <p className="text-sm font-medium">Visit Duration</p>
+            <p className="text-sm font-medium">Average Sites Rankings</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
