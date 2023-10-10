@@ -90,7 +90,6 @@ function App() {
                             </>
                         }
                     />
-                    {/* Добавьте этот маршрут для перенаправления всех несуществующих страниц на ErrorPage */}
                     <Route path="*" element={<ErrorPage />} />
                 </Route>
             </Routes>
