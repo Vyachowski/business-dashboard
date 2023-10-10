@@ -7,7 +7,7 @@ const DataAddition = () => {
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
-          {/* <!-- Contact Form --> */}
+          {/* <!-- Income Form --> */}
           <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className="font-medium text-black dark:text-white">
@@ -47,7 +47,132 @@ const DataAddition = () => {
                 </div>
 
                 <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                  Send income data
+                  Save income data
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="flex flex-col gap-9">
+          {/* <!-- Business metrics Form --> */}
+          <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+              <h3 className="font-medium text-black dark:text-white">
+                Business metrics entry
+              </h3>
+            </div>
+            <form action="#">
+              <div className="p-6.5">
+                <fieldset className="grid grid-cols-3 gap-4 items-end">
+                  <div className="col-span-1">
+                    <legend className="mb-2.5">Total Lead cost</legend>
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Total Lead Cost Goal
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Lead Cost Target from PPC
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Lead Cost Goal from SEO
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset className="grid grid-cols-3 gap-4 items-end">
+                  <div className="col-span-1">
+                    <legend className="mb-2.5">Total Lead cost</legend>
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Total Lead Cost Goal
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Lead Cost Target from PPC
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Lead Cost Goal from SEO
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset className="grid grid-cols-3 gap-4 items-end">
+                  <div className="col-span-1">
+                    <legend className="mb-2.5">Lead amount</legend>
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Total Lead Cost Goal
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Lead Cost Target from PPC
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4.5">
+                      <label className="mb-2.5 block text-black dark:text-white">
+                        Lead Cost Goal from SEO
+                      </label>
+                      <input
+                          type="number"
+                          className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+                <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
+                  Save goals data
                 </button>
               </div>
             </form>
