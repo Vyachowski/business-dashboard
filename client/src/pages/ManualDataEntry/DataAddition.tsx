@@ -65,13 +65,14 @@ const DataAddition = () => {
               <div className="p-6.5">
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Total Lead cost</legend>
+                    <legend className="mb-2.5">Revenue amount</legend>
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Total Lead Cost Goal
+                        Total revenue Target
                       </label>
                       <input
                           type="number"
+                          placeholder="300 000"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -79,10 +80,11 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Target from PPC
+                        Revenue Target from PPC
                       </label>
                       <input
                           type="number"
+                          placeholder="150 000"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -90,10 +92,11 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Goal from SEO
+                        Revenue Target from SEO
                       </label>
                       <input
                           type="number"
+                          placeholder="150 000"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -101,13 +104,14 @@ const DataAddition = () => {
                 </fieldset>
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Total Lead cost</legend>
+                    <legend className="mb-2.5">Lead cost</legend>
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Total Lead Cost Goal
+                        Total Lead Cost Target
                       </label>
                       <input
                           type="number"
+                          placeholder="275"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -119,6 +123,7 @@ const DataAddition = () => {
                       </label>
                       <input
                           type="number"
+                          placeholder="400"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -126,10 +131,11 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Goal from SEO
+                        Lead Cost Target from SEO
                       </label>
                       <input
                           type="number"
+                          placeholder="150"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -140,10 +146,11 @@ const DataAddition = () => {
                     <legend className="mb-2.5">Lead amount</legend>
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Total Lead Cost Goal
+                        Total Lead Amount Target
                       </label>
                       <input
                           type="number"
+                          placeholder="500"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -151,10 +158,11 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Target from PPC
+                        Lead Amount Target from PPC
                       </label>
                       <input
                           type="number"
+                          placeholder="250"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
@@ -162,17 +170,18 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Goal from SEO
+                        Lead Amount Target from SEO
                       </label>
                       <input
                           type="number"
+                          placeholder="250"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       />
                     </div>
                   </div>
                 </fieldset>
                 <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                  Save goals data
+                  Save business Targets
                 </button>
               </div>
             </form>
