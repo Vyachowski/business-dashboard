@@ -1,55 +1,18 @@
-import express from "express";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import validator from "validator";
-import {DataTypes, Sequelize} from "sequelize";
-const router = express.Router();
+import validator from 'validator';
+import User from '../models/User.js';
+import sequelize from "../config/database.js";
 
-// User API
-// Secret key for JWT signing
 const secretKey = process.env.JWT_SECRET_KEY;
 
-// Middlewares for parsing JSON requests and cookie
-router.use(bodyParser.json()); // Get data from post request
-router.use(cookieParser()); // Enable cookie handling
-
-// Connect to database
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite'
-});
-
-// Create User model
-const User = sequelize.define('User', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-});
-
-router.post('/register', async (req, res) => {
+export async function registerUser(req, res) {
   await sequelize.sync();
   const { name, password, email } = req.body;
 
   // Check if email is valid
   if (!validator.isEmail(email)) {
-    return res.status(400).json({message: 'Invalid email address.'});
+      return res.status(400).json({message: 'Invalid email address.'});
   }
 
   // Hash the password before storing it
@@ -58,27 +21,26 @@ router.post('/register', async (req, res) => {
   // Create a new user
   let newUser;
   try {
-    newUser = await User.create({ name, email, password: hashedPassword });
+      newUser = await User.create({ name, email, password: hashedPassword });
   } catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      console.error(error);
-      return res.status(400).json({message: 'Email is already registered'});
-    }
-    res.status(500).json({message: 'Something went wrong.'});
+      if (error.name === 'SequelizeUniqueConstraintError') {
+          console.error(error);
+          return res.status(400).json({message: 'Email is already registered'});
+      }
+      res.status(500).json({message: 'Something went wrong.'});
   }
 
   // Generate a JWT for the new user
   const token = jwt.sign({id: newUser.id, email: newUser.email}, secretKey, {
-    expiresIn: '1h', // Token expires in 1 hour
+      expiresIn: '1h', // Token expires in 1 hour
   });
 
   // Set the JWT as an HTTP cookie
   res.cookie('token', token, {httpOnly: true});
   res.status(201).json({message: 'User registered successfully'});
-});
+}
 
-// Endpoint for user login
-router.post('/login', async (req, res) => {
+export async function loginUser(req, res) {
   await sequelize.sync();
   const { email, password } = req.body;
 
@@ -112,10 +74,9 @@ router.post('/login', async (req, res) => {
 
   // Server response if successful
   res.status(200).json({ message: 'Login successful' });
-});
+}
 
-// Endpoint for token refresh
-router.post('/refresh', async (req, res) => {
+export async function refreshTokens(req, res) {
   await sequelize.sync();
   const refreshToken = req.cookies.refreshToken;
 
@@ -138,40 +99,14 @@ router.post('/refresh', async (req, res) => {
 
     res.status(200).json({message: 'Token refreshed successfully'});
   });
-});
+}
 
-router.post('/logout', (req, res) => {
-  // Clear the JWT cookie
+export async function logoutUser(req, res) {
   res.clearCookie('token');
   res.status(200).json({ message: 'Logout successful' });
-});
+}
 
-export default router;
-
-
-
-
-
-
-
-// Old version of registration
-// Endpoint for user registration
-// app.post('/api/user/register', async (req, res) => {
-//   await sequelize.sync();
-//   const { name, password, email } = req.body;
-//
-//   if (!validator.isEmail(email)) {
-//     return res.status(400).json({error: 'Invalid email address.'});
-//   }
-
-// try {
-//   await User.create({name, email, password});
-//   res.status(201).json({ message: 'User succesfully created!' })
-// } catch(error) {
-//   if (error.name === 'SequelizeUniqueConstraintError') {
-//     console.error(error);
-//     return res.status(400).json({ error: 'Email is already registered' });
-//   }
-//   res.status(500).json({ error: 'Something went wrong.' });
-// }
-// })
+export async function getUserProfile(req, res) {
+  const { id, name, email } = req.user;
+  res.status(200).json({ id, name, email });
+}

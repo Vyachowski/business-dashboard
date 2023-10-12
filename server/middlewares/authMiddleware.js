@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
+import User from "../models/User.js";
 
-// Secret key for JWT verification (must match the key used for signing)
 const secretKey = process.env.JWT_SECRET_KEY;
 
-// Middleware function to verify JWTs
 function authenticateJWT(req, res, next) {
   const accessToken = req?.cookies?.token;
   const refreshToken = req?.cookies?.refreshToken;
@@ -12,7 +11,7 @@ function authenticateJWT(req, res, next) {
     return res.status(401).json({ message: 'Access token not found' });
   }
 
-  jwt.verify(accessToken, secretKey, (err, user) => {
+  jwt.verify(accessToken, secretKey, async (err, user) => {
     if (err) {
       // Access token verification failed
       if (!refreshToken) {
@@ -26,7 +25,7 @@ function authenticateJWT(req, res, next) {
         }
 
         // Generate a new access token
-        const newAccessToken = jwt.sign({ id: user.id, username: user.username }, secretKey, {
+        const newAccessToken = jwt.sign({ id: user.id, email: user.email }, secretKey, {
           expiresIn: '1h', // New access token expires in 1 hour
         });
 
@@ -39,7 +38,18 @@ function authenticateJWT(req, res, next) {
       });
     } else {
       // Access token is valid
-      req.user = user;
+      const foundUser = await User.findOne({
+        where: {
+          id: user.id,
+        },
+      });
+
+      if (!foundUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Attach the user information to the request
+      req.user = foundUser;
       next();
     }
   });

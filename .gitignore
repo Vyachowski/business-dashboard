@@ -38,6 +38,7 @@ chrome-user-data
 *.swo
 .env
 *.sqlite
+*.sqlite3
 *.db
 
 packages/react-devtools-core/dist

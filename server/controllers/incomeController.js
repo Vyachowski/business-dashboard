@@ -1,39 +1,8 @@
-import {DataTypes, Op, Sequelize} from "sequelize";
-import express from "express";
-import bodyParser from 'body-parser';
-import authMiddleware from "../user/authMiddleware.js";
-const router = express.Router();
+import Income from '../models/Income.js';
+import { Op } from "sequelize";
+import sequelize from "../config/database.js";
 
-// Income API
-// Middleware for parsing JSON requests
-router.use(bodyParser.json()); // Get data from post request
-
-// Connect to database
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite'
-});
-
-// Create Income model
-const Income = sequelize.define('Income', {
-  date: {
-    type: DataTypes.DATEONLY,
-    primaryKey: true,
-    allowNull: false
-  },
-  profit: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  currency: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-});
-
-// Get income by period
-router.get('/', authMiddleware, async (req, res) => {
-  await sequelize.sync();
+export async function getIncomeByPeriod(req, res) {
   try {
     const { startDate, endDate, type } = req.query;
 
@@ -71,11 +40,9 @@ router.get('/', authMiddleware, async (req, res) => {
     console.error('Error while handling request:', error);
     res.status(500).json({ error: 'Internal server error.' });
   }
-});
+}
 
-// Post income by period
-router.post('/', authMiddleware, async (req, res) => {
-  await sequelize.sync();
+export async function postIncomeByPeriod(req, res) {
   const {startDate, endDate, profit} = req.body;
 
   if (!startDate || !endDate) {
@@ -100,6 +67,4 @@ router.post('/', authMiddleware, async (req, res) => {
   } finally {
     await sequelize.close();
   }
-});
-
-export default router;
+}

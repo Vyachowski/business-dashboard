@@ -1,30 +1,22 @@
 import express from 'express';
-import 'dotenv/config';
-import userRouter from './user/auth.js';
-import incomeRouter from './income/income.js';
-import authMiddleware from "./user/authMiddleware.js";
-import cookieParser from "cookie-parser";
+import userRouter from './routes/userRouter.js';
+import incomeRouter from './routes/incomeRouter.js';
+import sequelize from "./config/database.js";
 
-// Create express server
 const app = express();
-const port = process.env.SERVER_PORT;
 
-// Add routers
-app.use(cookieParser());
-app.use('/api/user', userRouter);
-app.use('/api/income', incomeRouter);
+app.use('/users', userRouter);
+app.use('/income', incomeRouter);
 
-// Test route
-app.get('/api/test', authMiddleware, (req, res) => {
-  // Access the authenticated user's information via req.user
-  res.json({ message: `Welcome, User!` });
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('All models were synchronized successfully.');
+  })
+  .catch((error) => {
+    console.error('Error synchronizing models:', error);
+  });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-// Start server
-app.listen(port, () => {
-  console.log(`App is listening on ${port}`)
-})
-
-// http://127.0.0.1:3011/api/income?startDate=2023-09-01&endDate=2023-09-02&type=total
-// query example total = GET http://127.0.0.1:3011/api/income?startDate=2023-01-01&endDate=2023-09-30&type=total
-// query example daily = GET http://127.0.0.1:3011/api/income?startDate=2023-01-01&endDate=2023-09-30&type=daily
