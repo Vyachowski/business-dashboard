@@ -6,9 +6,9 @@ import express from 'express';
 
 const app = express();
 
-app.use('/user', userRouter);
 app.use('/income', incomeRouter);
 app.use('/leads', leadsRouter);
+app.use('/user', userRouter);
 
 sequelize.sync({ force: false })
   .then(() => {
