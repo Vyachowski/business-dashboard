@@ -65,10 +65,10 @@ const DataAddition = () => {
               <div className="p-6.5">
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Revenue amount</legend>
+                    <legend className="mb-2.5">Revenue amount goals</legend>
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Total revenue Target
+                        Total
                       </label>
                       <input
                           type="number"
@@ -80,7 +80,7 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Revenue Target from PPC
+                        From PPC
                       </label>
                       <input
                           type="number"
@@ -92,7 +92,7 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Revenue Target from SEO
+                        From SEO
                       </label>
                       <input
                           type="number"
@@ -104,10 +104,10 @@ const DataAddition = () => {
                 </fieldset>
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Lead cost</legend>
+                    <legend className="mb-2.5">Lead cost goals</legend>
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Total Lead Cost Target
+                        Total
                       </label>
                       <input
                           type="number"
@@ -119,7 +119,7 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Target from PPC
+                        From PPC
                       </label>
                       <input
                           type="number"
@@ -131,7 +131,7 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Cost Target from SEO
+                        From SEO
                       </label>
                       <input
                           type="number"
@@ -143,10 +143,10 @@ const DataAddition = () => {
                 </fieldset>
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Lead amount</legend>
+                    <legend className="mb-2.5">Lead amount goals</legend>
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Total Lead Amount Target
+                        Total
                       </label>
                       <input
                           type="number"
@@ -158,7 +158,7 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Amount Target from PPC
+                        From PPC
                       </label>
                       <input
                           type="number"
@@ -170,7 +170,7 @@ const DataAddition = () => {
                   <div className="col-span-1">
                     <div className="mb-4.5">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Lead Amount Target from SEO
+                        From SEO
                       </label>
                       <input
                           type="number"
@@ -181,7 +181,7 @@ const DataAddition = () => {
                   </div>
                 </fieldset>
                 <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                  Save business Targets
+                  Save businesss goals
                 </button>
               </div>
             </form>
