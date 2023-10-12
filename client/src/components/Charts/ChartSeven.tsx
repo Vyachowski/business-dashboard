@@ -155,7 +155,7 @@ const ChartSeven: React.FC = () => {
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h4 className="text-title-sm2 font-bold text-black dark:text-white">
-            Payments Overview
+            Revenue Overview
           </h4>
         </div>
         <div className="flex items-center">
@@ -203,13 +203,13 @@ const ChartSeven: React.FC = () => {
         <div className="border-stroke py-2 dark:border-strokedark xsm:w-1/2 xsm:border-r">
           <p className="font-medium">Received Amount</p>
           <h4 className="mt-1 text-title-sm font-bold text-black dark:text-white">
-            $45,070.00
+            45,070.00 RUB
           </h4>
         </div>
         <div className="py-2 xsm:w-1/2">
           <p className="font-medium">Due Amount</p>
           <h4 className="mt-1 text-title-sm font-bold text-black dark:text-white">
-            $32,400.00
+            32,400.00 RUB
           </h4>
         </div>
       </div>
