@@ -1,8 +1,8 @@
-import express from 'express';
-import userRouter from './routes/userRouter.js';
 import incomeRouter from './routes/incomeRouter.js';
 import leadsRouter from './routes/leadsRouter.js';
+import userRouter from './routes/userRouter.js';
 import sequelize from "./config/database.js";
+import express from 'express';
 
 const app = express();
 
