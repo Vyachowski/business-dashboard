@@ -1,13 +1,13 @@
 import sequelize from "../config/database.js";
-import Income from '../models/Income.js';
-import {Op} from "sequelize";
+import Lead from '../models/LeadModel.js';
+import { Op } from "sequelize";
 
-export async function getIncomeByPeriod(req, res) {
+export async function getLeadsByPeriod(req, res) {
   try {
-    const {startDate, endDate, type} = req.query;
+    const { startDate, endDate, type } = req.query;
 
     if (!startDate || !endDate) {
-      return res.status(400).json({error: 'Please, define a period of time.'});
+      return res.status(400).json({ error: 'Please, define a period of time.' });
     }
 
     const formattedStartDate = new Date(startDate);
@@ -16,7 +16,7 @@ export async function getIncomeByPeriod(req, res) {
     let result;
 
     if (type === 'total') {
-      result = await Income.sum('profit', {
+      result = await Lead.sum('profit', {
         where: {
           date: {
             [Op.between]: [formattedStartDate, formattedEndDate],
@@ -24,7 +24,7 @@ export async function getIncomeByPeriod(req, res) {
         },
       });
     } else if (type === 'daily') {
-      result = await Income.findAll({
+      result = await Lead.findAll({
         where: {
           date: {
             [Op.between]: [formattedStartDate, formattedEndDate],
@@ -32,17 +32,17 @@ export async function getIncomeByPeriod(req, res) {
         },
       });
     } else {
-      return res.status(400).json({error: 'Invalid type parameter. Use "total" or "daily".'});
+      return res.status(400).json({ error: 'Invalid type parameter. Use "total" or "daily".' });
     }
 
-    res.json({result});
+    res.json({ result });
   } catch (error) {
     console.error('Error while handling request:', error);
-    res.status(500).json({error: 'Internal server error.'});
+    res.status(500).json({ error: 'Internal server error.' });
   }
 }
 
-export async function postIncomeByPeriod(req, res) {
+export async function postLeadsByPeriod(req, res) {
   const {startDate, endDate, profit} = req.body;
 
   if (!startDate || !endDate) {
@@ -58,7 +58,7 @@ export async function postIncomeByPeriod(req, res) {
 
   try {
     for (let currentDate = formattedStartDate; currentDate <= formattedEndDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      await Income.create({date: currentDate, profit: profitPerDay, currency: 'Rub'});
+      await Lead.create({date: currentDate, profit: profitPerDay, currency: 'Rub'});
       console.log(`Added: Date: ${currentDate}, Profit: ${profitPerDay}, Currency: Rub`);
     }
     console.log('Successfully updated.');

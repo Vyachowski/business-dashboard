@@ -1,12 +1,14 @@
 import express from 'express';
 import userRouter from './routes/userRouter.js';
 import incomeRouter from './routes/incomeRouter.js';
+import leadsRouter from './routes/leadsRouter.js';
 import sequelize from "./config/database.js";
 
 const app = express();
 
-app.use('/users', userRouter);
+app.use('/user', userRouter);
 app.use('/income', incomeRouter);
+app.use('/leads', leadsRouter);
 
 sequelize.sync({ force: false })
   .then(() => {

@@ -1,8 +1,8 @@
-import {DataTypes} from "sequelize";
 import sequelize from "../config/database.js";
+import { DataTypes } from "sequelize";
 import User from "./User.js";
 
-const Income = sequelize.define('Income', {
+const Lead = sequelize.define('Lead', {
   date: {
     type: DataTypes.DATEONLY,
     primaryKey: true,
@@ -22,7 +22,7 @@ const Income = sequelize.define('Income', {
   }
 });
 
-Income.belongsTo(User, {foreignKey: 'userId'});
-User.hasMany(Income, {foreignKey: 'userId'});
+Lead.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Lead, { foreignKey: 'userId' });
 
-export default Income;
+export default Lead;
