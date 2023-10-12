@@ -11,10 +11,10 @@ const YaAuthSuggestComponent = () => {
                         {
                             client_id: 'c46f0c53093440c39f12eff95a9f2f93',
                             response_type: 'token',
-                            redirect_uri: 'https://examplesite.com/suggest/token'
+                            redirect_uri: 'http://localhost:5174/auth/token'
                         },
                         // @ts-ignore
-                        tokenPageOrigin,
+                        'http://localhost:5174/auth/check',
                         // {
                         //     view: 'button',
                         //     parentId: 'buttonContainerId',

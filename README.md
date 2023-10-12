@@ -17,7 +17,7 @@
 #### Design
 - [x] Dashboard template
 - [x] Sign in/Sign up pages
-- [ ] Inner pages
+- [x] Inner pages
 
 #### Backend
 ###### Authentication
@@ -32,18 +32,18 @@
 
 #### Frontend
 ###### Registration and logging in
-- [ ] Create welcome page (Desktop)
-- [ ] Create sign-up page (Desktop)
-- [ ] Create sign-in page (Desktop)
+- [x] Create welcome page (Desktop)
+- [x] Create sign-up page (Desktop)
+- [x] Create sign-in page (Desktop)
 ###### Main page
-- [ ] Dashboard page (Desktop)
+- [x] Dashboard page (Desktop)
 ###### Analytics pages
-- [ ] Insights page (Desktop)
-- [ ] Tasks page (Desktop)
-- [ ] SEO traffic page (Desktop)
-- [ ] PPC traffic page (Desktop)
+- [x] Insights page (Desktop)
+- [x] Tasks page (Desktop)
+- [x] SEO traffic page (Desktop)
+- [x] PPC traffic page (Desktop)
 ###### Entry form
-- [ ] Income entry page with a form to post data (Desktop)
+- [x] Income entry page with a form to post data (Desktop)
 
 ## Branch Naming Convention
 
