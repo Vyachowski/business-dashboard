@@ -1,5 +1,5 @@
 import sequelize from "../config/database.js";
-import Income from '../models/Income.js';
+import Income from '../models/IncomeModel.js';
 import {Op} from "sequelize";
 
 export async function getIncomeByPeriod(req, res) {

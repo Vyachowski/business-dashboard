@@ -1,6 +1,6 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
-import User from "./User.js";
+import User from "./UserModel.js";
 
 const Lead = sequelize.define('Lead', {
   date: {

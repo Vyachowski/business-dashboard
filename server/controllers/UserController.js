@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
-import User from '../models/User.js';
+import User from '../models/UserModel.js';
 import sequelize from "../config/database.js";
 
 const secretKey = process.env.JWT_SECRET_KEY;
