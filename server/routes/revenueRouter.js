@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import authMiddleware from '../middlewares/authMiddleware.js';
-import { getIncomeByPeriod, postIncomeByPeriod } from '../controllers/incomeController.js';
+import { getIncomeByPeriod, postIncomeByPeriod } from '../controllers/revenueController.js';
 
 const router = express.Router();
 

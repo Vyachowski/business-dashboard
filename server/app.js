@@ -1,4 +1,5 @@
-import incomeRouter from './routes/incomeRouter.js';
+import activitiesRouter from "./routes/activitiesRouter.js";
+import revenueRouter from './routes/revenueRouter.js';
 import leadsRouter from './routes/leadsRouter.js';
 import userRouter from './routes/userRouter.js';
 import sequelize from "./config/database.js";
@@ -6,9 +7,10 @@ import express from 'express';
 
 const app = express();
 
-app.use('/income', incomeRouter);
-app.use('/leads', leadsRouter);
-app.use('/user', userRouter);
+app.use('/activities/', activitiesRouter);
+app.use('/revenue/', revenueRouter);
+app.use('/leads/', leadsRouter);
+app.use('/user/', userRouter);
 
 sequelize.sync({ force: false })
   .then(() => {

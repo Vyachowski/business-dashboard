@@ -2,7 +2,7 @@ import {DataTypes} from "sequelize";
 import sequelize from "../config/database.js";
 import User from "./UserModel.js";
 
-const Income = sequelize.define('Income', {
+const Revenue = sequelize.define('Income', {
   date: {
     type: DataTypes.DATEONLY,
     primaryKey: true,
@@ -22,7 +22,7 @@ const Income = sequelize.define('Income', {
   }
 });
 
-Income.belongsTo(User, {foreignKey: 'userId'});
-User.hasMany(Income, {foreignKey: 'userId'});
+Revenue.belongsTo(User, {foreignKey: 'userId'});
+User.hasMany(Revenue, {foreignKey: 'userId'});
 
-export default Income;
+export default Revenue;

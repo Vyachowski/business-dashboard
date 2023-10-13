@@ -2,12 +2,10 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
 import User from '../models/UserModel.js';
-import sequelize from "../config/database.js";
 
 const secretKey = process.env.JWT_SECRET_KEY;
 
 export async function registerUser(req, res) {
-  await sequelize.sync();
   const { name, password, email } = req.body;
 
   // Check if email is valid
@@ -41,7 +39,6 @@ export async function registerUser(req, res) {
 }
 
 export async function loginUser(req, res) {
-  await sequelize.sync();
   const { email, password } = req.body;
 
   // Find the user with the given email
@@ -77,7 +74,6 @@ export async function loginUser(req, res) {
 }
 
 export async function refreshTokens(req, res) {
-  await sequelize.sync();
   const refreshToken = req.cookies.refreshToken;
 
   if (!refreshToken) {
