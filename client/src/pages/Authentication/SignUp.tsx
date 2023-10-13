@@ -1,10 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
+import axios from 'axios';
 
 const SignUp: React.FC = () => {
+  const [state, setState] = useState({
+    fullName: "Selva Chaikin",
+    email: "selva@mail.ru",
+    password: "123",
+    passwordConfirmation: "123",
+  });
+
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSignUpForm = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const fullName = formData.get('fullName');
+    const email = formData.get('email');
+    const password = formData.get('password');
+    const passwordConfirmation = formData.get('passwordConfirmation');
+
+    if (password === passwordConfirmation) {
+      try {
+        const response = await axios.post('http://localhost:3011/api/user/sign-up/', {
+          name: fullName,
+          email: email,
+          password: password,
+        });
+
+        console.log('Successfully completed!', response.data);
+      } catch (error) {
+        console.error('Sorry:', error);
+      }
+    }
+  }
+
   return (
     <>
       <Breadcrumb pageName="Sign Up" />
@@ -154,18 +193,20 @@ const SignUp: React.FC = () => {
                 Sign Up to Insightful
               </h2>
 
-              <form>
+              <form name="signUpForm" onSubmit={handleSignUpForm}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Name
+                    Full Name
                   </label>
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Enter your full name"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      value = {state.fullName}
+                      onChange={handleInputChange}
+                      name="fullName"
                     />
-
                     <span className="absolute right-4 top-4">
                       <svg
                         className="fill-current"
@@ -199,6 +240,9 @@ const SignUp: React.FC = () => {
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      value = {state.email}
+                      onChange={handleInputChange}
+                      name="email"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -230,6 +274,9 @@ const SignUp: React.FC = () => {
                       type="password"
                       placeholder="Enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      value = {state.password}
+                      onChange={handleInputChange}
+                      name="password"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -265,6 +312,9 @@ const SignUp: React.FC = () => {
                       type="password"
                       placeholder="Re-enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      value = {state.passwordConfirmation}
+                      onChange={handleInputChange}
+                      name="passwordConfirmation"
                     />
 
                     <span className="absolute right-4 top-4">
