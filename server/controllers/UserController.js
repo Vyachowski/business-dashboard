@@ -1,25 +1,25 @@
+import User from '../models/UserModel.js';
+import validator from 'validator';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import validator from 'validator';
-import User from '../models/UserModel.js';
+import 'dotenv/config';
 
 const secretKey = process.env.JWT_SECRET_KEY;
 
 export async function registerUser(req, res) {
   const { name, password, email } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  let createdUser;
 
-  // Check if email is valid
   if (!validator.isEmail(email)) {
       return res.status(400).json({message: 'Invalid email address.'});
   }
 
-  // Hash the password before storing it
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
-  // Create a new user
-  let newUser;
   try {
-      newUser = await User.create({ name, email, password: hashedPassword });
+    createdUser = await User.create({ name, email, password: hashedPassword });
+    if (!createdUser) {
+      return res.status(500).json({message: 'User creation failed'});
+    }
   } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
           console.error(error);
@@ -28,12 +28,10 @@ export async function registerUser(req, res) {
       res.status(500).json({message: 'Something went wrong.'});
   }
 
-  // Generate a JWT for the new user
-  const token = jwt.sign({id: newUser.id, email: newUser.email}, secretKey, {
+  const token = jwt.sign({id: createdUser.id, email: createdUser.email}, secretKey, {
       expiresIn: '1h', // Token expires in 1 hour
   });
 
-  // Set the JWT as an HTTP cookie
   res.cookie('token', token, {httpOnly: true});
   res.status(201).json({message: 'User registered successfully'});
 }
