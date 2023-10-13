@@ -14,8 +14,8 @@ const router = express.Router();
 router.use(bodyParser.json()); // Get data from post request
 router.use(cookieParser()); // Enable cookie handling
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
+router.post('/sign-up', registerUser);
+router.post('/sign-in', loginUser);
 router.post('/refresh', refreshTokens);
 router.post('/logout', authMiddleware, logoutUser);
 router.get('/profile', authMiddleware, getUserProfile);
