@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
+import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../../images/logo/logo.svg';
+import React, {useState} from 'react';
 import axios from 'axios';
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     fullName: "Selva Chaikin",
     email: "selva@mail.ru",
@@ -37,7 +38,9 @@ const SignUp: React.FC = () => {
           password: password,
         });
 
-        console.log('Successfully completed!', response.data);
+        if (response.status === 201) {
+          navigate('/');
+        }
       } catch (error) {
         console.error('Sorry:', error);
       }
