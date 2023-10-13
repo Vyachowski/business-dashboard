@@ -4,13 +4,17 @@ import leadsRouter from './routes/leadsRouter.js';
 import userRouter from './routes/userRouter.js';
 import sequelize from "./config/database.js";
 import express from 'express';
+import cors from 'cors';
+import 'dotenv/config';
 
 const app = express();
 
-app.use('/activities/', activitiesRouter);
-app.use('/revenue/', revenueRouter);
-app.use('/leads/', leadsRouter);
-app.use('/user/', userRouter);
+app.use(cors());
+
+app.use('/api/activities/', activitiesRouter);
+app.use('/api/revenue/', revenueRouter);
+app.use('/api/leads/', leadsRouter);
+app.use('/api/user/', userRouter);
 
 sequelize.sync({ force: false })
   .then(() => {
