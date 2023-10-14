@@ -15,19 +15,20 @@ export function AuthProvider({children}) {
   useEffect(() => {
     async function checkAuthentication() {
       try {
-        const accessToken = localStorage.getItem('token');
+        const accessToken = localStorage.getItem('accessToken');
         const refreshToken = localStorage.getItem('refreshToken');
 
-        document.cookie = `token=${accessToken}; path=/`;
+        document.cookie = `accessToken=${accessToken}; path=/`;
         document.cookie = `refreshToken=${refreshToken}; path=/`;
 
         const response = await axios.get('http://localhost:3011/api/user/profile', {
           withCredentials: true
         });
         if (response.status === 200) {
-          const { name: fullName, email, id } = response.data;
+          const { fullName, email, id } = response.data;
 
           setProfile({ fullName, email, id});
+
           setIsAuthenticated(true);
         }
       } catch (error) {
@@ -38,11 +39,11 @@ export function AuthProvider({children}) {
     checkAuthentication().then(r => r);
   }, []);
 
-  // const login = () => setIsAuthenticated(true);
-  // const logout = () => setIsAuthenticated(false);
+  const login = () => setIsAuthenticated(true);
+  const logout = () => setIsAuthenticated(false);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, profile }}>
+    <AuthContext.Provider value={{ isAuthenticated, profile, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

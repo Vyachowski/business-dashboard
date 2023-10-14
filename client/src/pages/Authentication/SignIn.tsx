@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+import AuthContext from "../../components/AuthContext.tsx";
 import LogoDark from '../../images/logo/logo-dark.svg';
+import {Link, useNavigate} from 'react-router-dom';
+import React, {useContext, useState} from 'react';
 import Logo from '../../images/logo/logo.svg';
 import axios from "axios";
 
 const SignIn: React.FC = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [state, setState] = useState({
     email: "selva@mail.ru",
@@ -34,6 +36,13 @@ const SignIn: React.FC = () => {
         });
 
         if (response.status === 201) {
+          const { accessToken, refreshToken } = response.data;
+
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+
+          login();
+
           navigate('/');
         }
       } catch (error) {

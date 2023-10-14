@@ -7,7 +7,7 @@ import 'dotenv/config';
 const secretKey = process.env.JWT_SECRET_KEY;
 
 export async function registerUser(req, res) {
-  const { name, password, email } = req.body;
+  const {fullName, password, email} = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
   let createdUser;
 
@@ -16,28 +16,31 @@ export async function registerUser(req, res) {
   }
 
   try {
-    createdUser = await User.create({ name, email, password: hashedPassword });
+    createdUser = await User.create({fullName, email, password: hashedPassword});
     if (!createdUser) {
       return res.status(500).json({message: 'User creation failed'});
     }
   } catch (error) {
-      if (error.name === 'SequelizeUniqueConstraintError') {
-        console.error(error);
-        return res.status(400).json({message: 'Email is already registered'});
-      }
-      res.status(500).json({message: 'Something went wrong.'});
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      console.error(error);
+      return res.status(400).json({message: 'Email is already registered'});
+    }
+    res.status(500).json({message: 'Something went wrong.'});
   }
 
   const accessToken = jwt.sign({id: createdUser.id, email: createdUser.email}, secretKey, {
-    expiresIn: '1h', // Access token expires in 1 hour
+    expiresIn: '1h',
   });
 
-  res.cookie('token', accessToken, {httpOnly: true, sameSite: 'none', secure: false});
-  res.status(201).json({message: 'User registered successfully'});
+  const refreshToken = jwt.sign({id: createdUser.id, email: createdUser.email}, secretKey, {
+    expiresIn: '7d',
+  });
+
+  res.status(201).json({message: 'User registered successfully', accessToken, refreshToken});
 }
 
 export async function loginUser(req, res) {
-  const { email, password } = req.body;
+  const {email, password} = req.body;
 
   // Find the user with the given email
   const user = await User.findOne({
@@ -52,13 +55,13 @@ export async function loginUser(req, res) {
   }
 
   // Generate an access token for the authenticated user
-  const accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey, {
-    expiresIn: '1h', // Token expires in 1 hour
+  const accessToken = jwt.sign({id: user.id, email: user.email}, secretKey, {
+    expiresIn: '1h',
   });
 
   // Generate a refresh token with a longer expiration time
-  const refreshToken = jwt.sign({ id: user.id, email: user.email }, secretKey, {
-    expiresIn: '7d', // Refresh token expires in 7 days
+  const refreshToken = jwt.sign({id: user.id, email: user.email}, secretKey, {
+    expiresIn: '7d',
   });
 
   // Server response if successful
@@ -69,37 +72,11 @@ export async function loginUser(req, res) {
   });
 }
 
-export async function refreshTokens(req, res) {
-  const refreshToken = req.cookies.refreshToken;
-
-  if (!refreshToken) {
-    return res.status(401).json({message: 'Refresh token not found'});
-  }
-
-  jwt.verify(refreshToken, secretKey, (err, user) => {
-    if (err) {
-      return res.status(403).json({message: 'Refresh token verification failed'});
-    }
-
-    // Generate a new access token
-    const accessToken = jwt.sign({id: user.id, username: user.username}, secretKey, {
-      expiresIn: '1h', // New access token expires in 1 hour
-    });
-
-    // Set the new access token as an HTTP cookie
-    res.cookie('token', accessToken, {httpOnly: true, sameSite: 'none', secure: false});
-
-    res.status(200).json({message: 'Token refreshed successfully'});
-  });
-}
-
-export async function logoutUser(req, res) {
-  res.clearCookie('token');
-  res.clearCookie('refreshToken');
-  res.status(200).json({ message: 'Logout successful' });
-}
-
 export async function getUserProfile(req, res) {
-  const { id, name, email } = req.user;
-  res.status(200).json({ id, name, email });
+  const newAccessToken = req.newAccessToken || null;
+  const {id, email} = req.user;
+  const user = await User.findByPk(id);
+  const fullName = user.fullName;
+  console.log(fullName);
+  res.status(200).json({id, fullName, email, newAccessToken});
 }

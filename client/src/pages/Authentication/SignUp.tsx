@@ -1,11 +1,13 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+import AuthContext from "../../components/AuthContext.tsx";
 import LogoDark from '../../images/logo/logo-dark.svg';
-import { useNavigate, Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import React, {useContext, useState} from 'react';
 import Logo from '../../images/logo/logo.svg';
-import React, {useState} from 'react';
-import axios from 'axios';
+import axios from "axios";
 
 const SignUp: React.FC = () => {
+  const { login, setProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const [state, setState] = useState({
     fullName: "Selva Chaikin",
@@ -33,16 +35,24 @@ const SignUp: React.FC = () => {
     if (password === passwordConfirmation) {
       try {
         const response = await axios.post('http://localhost:3011/api/user/sign-up/', {
-          name: fullName,
+          fullName: fullName,
           email: email,
           password: password,
         });
 
         if (response.status === 201) {
+          const { accessToken, refreshToken, fullName } = response.data;
+
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+
+          setProfile({fullName});
+          login();
+
           navigate('/');
         }
       } catch (error) {
-        console.error('Sorry:', error);
+        console.error('Error occurred during the process:', error);
       }
     }
   }
