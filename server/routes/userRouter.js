@@ -1,11 +1,11 @@
 import express from 'express';
 import authMiddleware from '../middlewares/authMiddleware.js';
 import {
-    registerUser,
-    loginUser,
-    refreshTokens,
-    logoutUser,
-    getUserProfile,
+  registerUser,
+  loginUser,
+  refreshTokens,
+  logoutUser,
+  getUserProfile,
 } from '../controllers/userController.js';
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";

@@ -9,7 +9,10 @@ import 'dotenv/config';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5174',
+  credentials: true,
+}));
 
 app.use('/api/activities/', activitiesRouter);
 app.use('/api/revenue/', revenueRouter);

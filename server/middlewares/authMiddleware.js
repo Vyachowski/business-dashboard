@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken';
 import User from "../models/UserModel.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const secretKey = process.env.JWT_SECRET_KEY;
 
 function authenticateJWT(req, res, next) {
-  const accessToken = req?.cookies?.token;
-  const refreshToken = req?.cookies?.refreshToken;
+  const accessToken = req.cookies.accessToken;
+  const refreshToken = req.cookies.refreshToken;
 
   if (!accessToken) {
     return res.status(401).json({ message: 'Access token not found' });
@@ -29,10 +31,9 @@ function authenticateJWT(req, res, next) {
           expiresIn: '1h', // New access token expires in 1 hour
         });
 
-        // Set the new access token as an HTTP cookie
-        res.cookie('token', newAccessToken, { httpOnly: true });
-
-        // Attach the user information to the request
+        // Attach the user information and auth tokens to the request
+        req.accessToken = newAccessToken;
+        req.refreshToken = refreshToken;
         req.user = user;
         next();
       });
@@ -54,5 +55,4 @@ function authenticateJWT(req, res, next) {
     }
   });
 }
-
 export default authenticateJWT;

@@ -12,7 +12,7 @@ export async function registerUser(req, res) {
   let createdUser;
 
   if (!validator.isEmail(email)) {
-      return res.status(400).json({message: 'Invalid email address.'});
+    return res.status(400).json({message: 'Invalid email address.'});
   }
 
   try {
@@ -22,17 +22,17 @@ export async function registerUser(req, res) {
     }
   } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
-          console.error(error);
-          return res.status(400).json({message: 'Email is already registered'});
+        console.error(error);
+        return res.status(400).json({message: 'Email is already registered'});
       }
       res.status(500).json({message: 'Something went wrong.'});
   }
 
-  const token = jwt.sign({id: createdUser.id, email: createdUser.email}, secretKey, {
-      expiresIn: '1h', // Token expires in 1 hour
+  const accessToken = jwt.sign({id: createdUser.id, email: createdUser.email}, secretKey, {
+    expiresIn: '1h', // Access token expires in 1 hour
   });
 
-  res.cookie('token', token, {httpOnly: true});
+  res.cookie('token', accessToken, {httpOnly: true, sameSite: 'none', secure: false});
   res.status(201).json({message: 'User registered successfully'});
 }
 
@@ -62,13 +62,18 @@ export async function loginUser(req, res) {
   });
 
   // Set the access token as an HTTP cookie
-  res.cookie('token', accessToken, { httpOnly: true });
+  // res.cookie('token', accessToken, { httpOnly: true, sameSite: 'none', secure: false });
 
   // Set the refresh token as an HTTP cookie
-  res.cookie('refreshToken', refreshToken, { httpOnly: true });
+  // res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: false });
 
   // Server response if successful
-  res.status(200).json({ message: 'Login successful' });
+  // res.status(200).json({ message: 'Login successful' });
+  res.status(200).json({
+    message: 'Login successful',
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+  });
 }
 
 export async function refreshTokens(req, res) {
@@ -89,7 +94,7 @@ export async function refreshTokens(req, res) {
     });
 
     // Set the new access token as an HTTP cookie
-    res.cookie('token', accessToken, {httpOnly: true});
+    res.cookie('token', accessToken, {httpOnly: true, sameSite: 'none', secure: false});
 
     res.status(200).json({message: 'Token refreshed successfully'});
   });
@@ -97,6 +102,7 @@ export async function refreshTokens(req, res) {
 
 export async function logoutUser(req, res) {
   res.clearCookie('token');
+  res.clearCookie('refreshToken');
   res.status(200).json({ message: 'Logout successful' });
 }
 
