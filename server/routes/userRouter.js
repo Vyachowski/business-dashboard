@@ -11,8 +11,8 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
 const router = express.Router();
-router.use(bodyParser.json()); // Get data from post request
-router.use(cookieParser()); // Enable cookie handling
+router.use(bodyParser.json());
+router.use(cookieParser());
 
 router.post('/sign-up', registerUser);
 router.post('/sign-in', loginUser);

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import User from "../models/UserModel.js";
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const secretKey = process.env.JWT_SECRET_KEY;
@@ -26,31 +26,16 @@ function authenticateJWT(req, res, next) {
           return res.status(403).json({ message: 'Refresh token verification failed' });
         }
 
-        // Generate a new access token
-        const newAccessToken = jwt.sign({ id: user.id, email: user.email }, secretKey, {
-          expiresIn: '1h', // New access token expires in 1 hour
+        // Generate a new access token and attach with user info to the request
+        req.newAccessToken = jwt.sign({id: user.id, email: user.email}, secretKey, {
+          expiresIn: '1h',
         });
-
-        // Attach the user information and auth tokens to the request
-        req.accessToken = newAccessToken;
-        req.refreshToken = refreshToken;
         req.user = user;
         next();
       });
     } else {
       // Access token is valid
-      const foundUser = await User.findOne({
-        where: {
-          id: user.id,
-        },
-      });
-
-      if (!foundUser) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-
-      // Attach the user information to the request
-      req.user = foundUser;
+      req.user = user;
       next();
     }
   });

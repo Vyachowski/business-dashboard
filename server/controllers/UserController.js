@@ -61,14 +61,7 @@ export async function loginUser(req, res) {
     expiresIn: '7d', // Refresh token expires in 7 days
   });
 
-  // Set the access token as an HTTP cookie
-  // res.cookie('token', accessToken, { httpOnly: true, sameSite: 'none', secure: false });
-
-  // Set the refresh token as an HTTP cookie
-  // res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: false });
-
   // Server response if successful
-  // res.status(200).json({ message: 'Login successful' });
   res.status(200).json({
     message: 'Login successful',
     accessToken: accessToken,
