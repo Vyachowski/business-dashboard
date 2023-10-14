@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useEffect, useRef, useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import UserOne from '../../images/user/user-01.png';
+import AuthContext from '../AuthContext.tsx';
 
 const DropdownUser = () => {
+  const { profile, isAuthenticated } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleSignInClick = () => {
+    navigate('/auth/signin');
+  };
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -36,7 +41,8 @@ const DropdownUser = () => {
   });
 
   return (
-    <div className="relative">
+    isAuthenticated
+      ? <div className="relative">
       <Link
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -45,7 +51,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            { profile.fullName}
           </span>
           {/*<span className="block text-xs">Role: Owner</span>*/}
         </span>
@@ -103,6 +109,7 @@ const DropdownUser = () => {
       </div>
       {/* <!-- Dropdown End --> */}
     </div>
+      : <a className="block cursor-pointer" onClick={handleSignInClick}>Sign in</a>
   );
 };
 

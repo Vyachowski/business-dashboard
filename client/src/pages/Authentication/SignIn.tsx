@@ -1,10 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
+import axios from "axios";
 
 const SignIn: React.FC = () => {
+  const navigate = useNavigate();
+  const [state, setState] = useState({
+    email: "selva@mail.ru",
+    password: "123",
+  });
+
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSignInForm = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    if (password) {
+      try {
+        const response = await axios.post('http://localhost:3011/api/user/sign-in/', {
+          email: email,
+          password: password,
+        });
+
+        if (response.status === 201) {
+          navigate('/');
+        }
+      } catch (error) {
+        console.error('Sorry:', error);
+      }
+    }
+  }
+
   return (
     <>
       <Breadcrumb pageName="Sign In" />
@@ -155,7 +192,7 @@ const SignIn: React.FC = () => {
                 Sign In to Insightful
               </h2>
 
-              <form>
+              <form name="signInForm" onSubmit={handleSignInForm}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Email
@@ -165,6 +202,9 @@ const SignIn: React.FC = () => {
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      value = {state.email}
+                      onChange={handleInputChange}
+                      name="email"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -196,6 +236,9 @@ const SignIn: React.FC = () => {
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      value = {state.password}
+                      onChange={handleInputChange}
+                      name="password"
                     />
 
                     <span className="absolute right-4 top-4">

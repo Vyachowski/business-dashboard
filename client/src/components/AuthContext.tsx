@@ -1,24 +1,51 @@
-import { createContext, useContext, useState } from 'react';
+import {createContext, useEffect, useState} from 'react';
+import axios from "axios";
 
 const AuthContext = createContext(null);
 
-export function AuthProvider({ children }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+export function AuthProvider({children}) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [profile, setProfile] = useState({
+    fullName: null,
+    email: null,
+    id: null,
+  });
 
-    const login = () => setIsAuthenticated(true);
-    const logout = () => setIsAuthenticated(false);
+  // @ts-ignore
+  useEffect(() => {
+    async function checkAuthentication() {
+      try {
+        const accessToken = localStorage.getItem('token');
+        const refreshToken = localStorage.getItem('refreshToken');
 
-    return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
-}
+        document.cookie = `token=${accessToken}; path=/`;
+        document.cookie = `refreshToken=${refreshToken}; path=/`;
 
-export function useAuth() {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error('useAuth should be used inside AuthProvider');
+        const response = await axios.get('http://localhost:3011/api/user/profile', {
+          withCredentials: true
+        });
+        if (response.status === 200) {
+          const { name: fullName, email, id } = response.data;
+
+          setProfile({ fullName, email, id});
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Authentication check failed:', error.message);
+        setIsAuthenticated(false);
+      }
     }
-    return context;
+    checkAuthentication().then(r => r);
+  }, []);
+
+  // const login = () => setIsAuthenticated(true);
+  // const logout = () => setIsAuthenticated(false);
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, profile }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
+
+export default AuthContext;
