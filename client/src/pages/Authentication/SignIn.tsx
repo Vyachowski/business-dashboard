@@ -35,13 +35,11 @@ const SignIn: React.FC = () => {
           password: password,
         });
 
-        if (response.status === 201) {
+        if (response.status === 200) {
+
           const { accessToken, refreshToken } = response.data;
 
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('refreshToken', refreshToken);
-
-          login();
+          login(accessToken, refreshToken);
 
           navigate('/');
         }

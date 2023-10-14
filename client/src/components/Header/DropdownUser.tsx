@@ -4,7 +4,7 @@ import UserOne from '../../images/user/user-01.png';
 import AuthContext from '../AuthContext.tsx';
 
 const DropdownUser = () => {
-  const { profile, isAuthenticated } = useContext(AuthContext);
+  const { profile, isAuthenticated, logout } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const handleSignInClick = () => {
@@ -39,6 +39,10 @@ const DropdownUser = () => {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     isAuthenticated
@@ -86,7 +90,7 @@ const DropdownUser = () => {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base" onClick={handleLogout}>
           <svg
             className="fill-current"
             width="22"

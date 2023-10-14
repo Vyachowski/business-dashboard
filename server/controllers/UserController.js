@@ -77,6 +77,5 @@ export async function getUserProfile(req, res) {
   const {id, email} = req.user;
   const user = await User.findByPk(id);
   const fullName = user.fullName;
-  console.log(fullName);
   res.status(200).json({id, fullName, email, newAccessToken});
 }

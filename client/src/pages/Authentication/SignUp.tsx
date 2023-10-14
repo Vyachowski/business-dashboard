@@ -7,7 +7,7 @@ import Logo from '../../images/logo/logo.svg';
 import axios from "axios";
 
 const SignUp: React.FC = () => {
-  const { login, setProfile } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [state, setState] = useState({
     fullName: "Selva Chaikin",
@@ -41,13 +41,9 @@ const SignUp: React.FC = () => {
         });
 
         if (response.status === 201) {
-          const { accessToken, refreshToken, fullName } = response.data;
+          const { accessToken, refreshToken } = response.data;
 
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('refreshToken', refreshToken);
-
-          setProfile({fullName});
-          login();
+          login(accessToken, refreshToken);
 
           navigate('/');
         }

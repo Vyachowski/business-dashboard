@@ -3,7 +3,7 @@ import axios from "axios";
 
 const AuthContext = createContext(null);
 
-export function AuthProvider({children}) {
+export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [profile, setProfile] = useState({
     fullName: null,
@@ -11,36 +11,61 @@ export function AuthProvider({children}) {
     id: null,
   });
 
-  // @ts-ignore
   useEffect(() => {
-    async function checkAuthentication() {
-      try {
-        const accessToken = localStorage.getItem('accessToken');
-        const refreshToken = localStorage.getItem('refreshToken');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
-        document.cookie = `accessToken=${accessToken}; path=/`;
-        document.cookie = `refreshToken=${refreshToken}; path=/`;
+    if (accessToken && refreshToken) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('http://localhost:3011/api/user/profile', {
+            withCredentials: true,
+          });
 
-        const response = await axios.get('http://localhost:3011/api/user/profile', {
-          withCredentials: true
-        });
-        if (response.status === 200) {
-          const { fullName, email, id } = response.data;
+          if (response.status === 200) {
+            const { fullName, email, id } = response.data;
 
-          setProfile({ fullName, email, id});
-
-          setIsAuthenticated(true);
+            setIsAuthenticated(true);
+            setProfile({ fullName, email, id });
+          }
+        } catch (error) {
+          console.error('Error while loading user profile:', error);
         }
-      } catch (error) {
-        console.error('Authentication check failed:', error.message);
-        setIsAuthenticated(false);
-      }
+      };
+
+      fetchData();
     }
-    checkAuthentication().then(r => r);
   }, []);
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  const login = async (accessToken: string, refreshToken: string) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+
+    document.cookie = `accessToken=${accessToken}; path=/`;
+    document.cookie = `refreshToken=${refreshToken}; path=/`;
+
+    const response = await axios.get('http://localhost:3011/api/user/profile', {
+      withCredentials: true
+    });
+    if (response.status === 200) {
+      const {fullName, email, id} = response.data;
+
+      setIsAuthenticated(true);
+      setProfile({fullName, email, id});
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+
+    setIsAuthenticated(false);
+    setProfile({
+      fullName: null,
+      email: null,
+      id: null,
+    });
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, profile, login, logout }}>
