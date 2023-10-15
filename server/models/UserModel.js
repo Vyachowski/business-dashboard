@@ -21,42 +21,42 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  total_revenue: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  ppc_revenue: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  seo_revenue: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  total_lead_cost: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  ppc_lead_cost: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  seo_lead_cost: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  total_lead_amount: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  ppc_lead_amount: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  seo_lead_amount: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
+  // total_revenue: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // ppc_revenue: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // seo_revenue: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // total_lead_cost: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // ppc_lead_cost: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // seo_lead_cost: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // total_lead_amount: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // ppc_lead_amount: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
+  // seo_lead_amount: {
+  //   type: DataTypes.INTEGER,
+  //   defaultValue: null,
+  // },
 });
 
 export default User;

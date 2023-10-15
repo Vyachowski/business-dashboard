@@ -1,3 +1,4 @@
+import BusinessMetrics from "../models/BusinessMetricsModel.js";
 import User from '../models/UserModel.js';
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
@@ -78,4 +79,33 @@ export async function getUserProfile(req, res) {
   const user = await User.findByPk(id);
   const fullName = user.fullName;
   res.status(200).json({id, fullName, email, newAccessToken});
+}
+
+export async function getBusinessMetrics(req, res) {
+  const newAccessToken = req.newAccessToken || null;
+  const {id} = req.user;
+  const businessMetrics = await BusinessMetrics.findByPk(id);
+  const {
+    totalRevenue,
+    ppcRevenue,
+    seoRevenue,
+    totalLeadCost,
+    ppcLeadCost,
+    seoLeadCost,
+    totalLeadAmount,
+    ppc_lead_amount,
+    seoLeadAmount,
+  } = businessMetrics;
+  res.status(200).json({
+    totalRevenue,
+    ppcRevenue,
+    seoRevenue,
+    totalLeadCost,
+    ppcLeadCost,
+    seoLeadCost,
+    totalLeadAmount,
+    ppc_lead_amount,
+    seoLeadAmount,
+    newAccessToken,
+  });
 }

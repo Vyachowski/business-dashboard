@@ -3,36 +3,37 @@ import sequelize from '../config/database.js';
 import User from "./UserModel.js";
 
 const BusinessMetrics = sequelize.define('BusinessMetrics', {
-  userId: {
+  id: {
     type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: false,
     allowNull: false,
-    primaryKey: true
   },
-  total_revenue: {
+  totalRevenue: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  ppc_revenue: {
+  ppcRevenue: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  seo_revenue: {
+  seoRevenue: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  total_lead_cost: {
+  totalLeadCost: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  ppc_lead_cost: {
+  ppcLeadCost: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  seo_lead_cost: {
+  seoLeadCost: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  total_lead_amount: {
+  totalLeadAmount: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
@@ -40,7 +41,7 @@ const BusinessMetrics = sequelize.define('BusinessMetrics', {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  seo_lead_amount: {
+  seoLeadAmount: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
@@ -56,7 +57,8 @@ User.hasOne(BusinessMetrics, {
 BusinessMetrics.belongsTo(User, {
   foreignKey: {
     name: 'userId',
-    allowNull: false
+    allowNull: false,
+    primaryKey: true,
   }
 });
 
