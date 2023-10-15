@@ -109,3 +109,38 @@ export async function getBusinessMetrics(req, res) {
     newAccessToken,
   });
 }
+
+export async function addBusinessMetrics(req, res) {
+  const { id } = req.user;
+  const {
+    totalRevenue,
+    ppcRevenue,
+    seoRevenue,
+    totalLeadCost,
+    ppcLeadCost,
+    seoLeadCost,
+    totalLeadAmount,
+    ppcLeadAmount,
+    seoLeadAmount,
+  } = req.businessMetrics;
+
+  BusinessMetrics.create({
+    userId: id,
+    totalRevenue: totalRevenue,
+    ppcRevenue: ppcRevenue,
+    seoRevenue: seoRevenue,
+    totalLeadCost: totalLeadCost,
+    ppcLeadCost: ppcLeadCost,
+    seoLeadCost: seoLeadCost,
+    totalLeadAmount: totalLeadAmount,
+    ppcLeadAmount: ppcLeadAmount,
+    seoLeadAmount: seoLeadAmount,
+  }).then((businessMetric) => {
+    console.log('New business metrics record created:', businessMetric);
+  }).catch((error) => {
+    console.error('Error while creating business metrics record:', error);
+  });
+
+  res.status(200).json({ message: "Business metrics added successfully!" });
+}
+
