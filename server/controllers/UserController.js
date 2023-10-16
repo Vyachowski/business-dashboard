@@ -82,31 +82,30 @@ export async function getUserProfile(req, res) {
 }
 
 export async function getBusinessMetrics(req, res) {
-  const newAccessToken = req.newAccessToken || null;
+  // const newAccessToken = req.newAccessToken || null;
   const {id} = req.user;
   const businessMetrics = await BusinessMetrics.findByPk(id);
   const {
-    totalRevenue,
-    ppcRevenue,
-    seoRevenue,
-    totalLeadCost,
-    ppcLeadCost,
-    seoLeadCost,
-    totalLeadAmount,
-    ppc_lead_amount,
-    seoLeadAmount,
+    totalRevenueGoal,
+    ppcRevenueGoal,
+    seoRevenueGoal,
+    totalLeadCostGoal,
+    ppcLeadCostGoal,
+    seoLeadCostGoal,
+    totalLeadAmountGoal,
+    ppcLeadAmountGoal,
+    seoLeadAmountGoal,
   } = businessMetrics;
   res.status(200).json({
-    totalRevenue,
-    ppcRevenue,
-    seoRevenue,
-    totalLeadCost,
-    ppcLeadCost,
-    seoLeadCost,
-    totalLeadAmount,
-    ppc_lead_amount,
-    seoLeadAmount,
-    newAccessToken,
+    totalRevenueGoal,
+    ppcRevenueGoal,
+    seoRevenueGoal,
+    totalLeadCostGoal,
+    ppcLeadCostGoal,
+    seoLeadCostGoal,
+    totalLeadAmountGoal,
+    ppcLeadAmountGoal,
+    seoLeadAmountGoal,
   });
 }
 
