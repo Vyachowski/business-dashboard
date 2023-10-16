@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
   }
 
   // After successful login
-  const handleLogin = (newAccessToken, newRefreshToken) => {
+  const handleLogin = (newAccessToken: string, newRefreshToken: string) => {
     setAccessToken(newAccessToken);
     setAccessToken(newRefreshToken);
     localStorage.setItem('accessToken', newAccessToken);
