@@ -50,7 +50,7 @@ const BusinessMetrics = sequelize.define('BusinessMetrics', {
 User.hasOne(BusinessMetrics, {
   foreignKey: {
     name: 'userId',
-    allowNull: false
+    allowNull: false,
   }
 });
 
@@ -58,7 +58,6 @@ BusinessMetrics.belongsTo(User, {
   foreignKey: {
     name: 'userId',
     allowNull: false,
-    primaryKey: true,
   }
 });
 
