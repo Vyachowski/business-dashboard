@@ -1,8 +1,8 @@
 import sequelize from "../config/database.js";
-import Income from '../models/RevenueModel.js';
+import Revenue from '../models/RevenueModel.js';
 import {Op} from "sequelize";
 
-export async function getIncomeByPeriod(req, res) {
+export async function getRevenueByPeriod(req, res) {
   try {
     const {startDate, endDate, type} = req.query;
 
@@ -16,7 +16,7 @@ export async function getIncomeByPeriod(req, res) {
     let result;
 
     if (type === 'total') {
-      result = await Income.sum('profit', {
+      result = await Revenue.sum('profit', {
         where: {
           date: {
             [Op.between]: [formattedStartDate, formattedEndDate],
@@ -24,7 +24,7 @@ export async function getIncomeByPeriod(req, res) {
         },
       });
     } else if (type === 'daily') {
-      result = await Income.findAll({
+      result = await Revenue.findAll({
         where: {
           date: {
             [Op.between]: [formattedStartDate, formattedEndDate],
@@ -42,8 +42,8 @@ export async function getIncomeByPeriod(req, res) {
   }
 }
 
-export async function postIncomeByPeriod(req, res) {
-  const {startDate, endDate, profit} = req.body;
+export async function postRevenueByPeriod(req, res) {
+  const {startDate, endDate, revenuePerPeriod} = req.body;
 
   if (!startDate || !endDate) {
     return res.status(400).json({error: 'Please, define a period of time.'});
@@ -54,12 +54,12 @@ export async function postIncomeByPeriod(req, res) {
   const differenceInMilliseconds = Math.abs(formattedStartDate - formattedEndDate);
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
   const differenceInDays = Math.floor(differenceInMilliseconds / millisecondsPerDay) + 1;
-  const profitPerDay = Math.ceil(Number(profit) / differenceInDays);
+  const revenuePerDay = Math.ceil(Number(revenuePerPeriod) / differenceInDays);
 
   try {
     for (let currentDate = formattedStartDate; currentDate <= formattedEndDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      await Income.create({date: currentDate, profit: profitPerDay, currency: 'Rub'});
-      console.log(`Added: Date: ${currentDate}, Profit: ${profitPerDay}, Currency: Rub`);
+      await Revenue.create({date: currentDate, profit: revenuePerDay, currency: 'Rub'});
+      console.log(`Added: Date: ${currentDate}, Profit: ${revenuePerDay}, Currency: Rub`);
     }
     console.log('Successfully updated.');
   } catch (error) {

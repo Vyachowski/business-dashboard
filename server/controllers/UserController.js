@@ -120,7 +120,7 @@ export async function addBusinessMetrics(req, res) {
     totalLeadAmount,
     ppcLeadAmount,
     seoLeadAmount,
-  } = req.businessMetrics;
+  } = req.body;
 
   BusinessMetrics.create({
     userId: id,

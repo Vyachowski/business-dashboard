@@ -1,5 +1,6 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import {useState} from "react";
+import axios from "axios";
 
 const DataAddition = () => {
   const [state, setState] = useState({
@@ -24,17 +25,25 @@ const DataAddition = () => {
     }));
   };
 
-  const handleIncomeForm = async (e: any) => {
+  const handleRevenueAdditionForm = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const startDate = formData.get('startDate');
     const endDate = formData.get('endDate');
     const revenuePerPeriod = formData.get('revenuePerPeriod');
-
+  
     try {
-      console.log(startDate, endDate, revenuePerPeriod);
+      const response = await axios.post('http://localhost:3011/api/revenue/', {
+        startDate,
+        endDate,
+        revenuePerPeriod,
+      });
+
+      if (response.status === 201) {
+        console.log('Revenue data was successfully added')
+      }
     } catch (error) {
-      console.error('Sorry:', error);
+      console.error('Sorry, there was an error during revenue data addition:', error);
     }
   }
   const handleBusinessMetricsForm = async (e: any) => {
@@ -80,7 +89,7 @@ const DataAddition = () => {
                 Income entry
               </h3>
             </div>
-            <form name="incomeForm" onSubmit={handleIncomeForm}>
+            <form name="incomeForm" onSubmit={handleRevenueAdditionForm}>
               <div className="p-6.5">
                 <div className="mb-4.5">
                   <label
