@@ -4,18 +4,18 @@ import axios from "axios";
 
 const DataAddition = () => {
   const [state, setState] = useState({
-    startDate: null,
-    endDate: null,
-    revenuePerPeriod: null,
-    totalRevenueGoal: null,
-    ppcRevenueGoal: null,
-    seoRevenueGoal: null,
-    totalLeadCostGoal: null,
-    ppcLeadCostGoal: null,
-    seoLeadCostGoal: null,
-    totalLeadAmountGoal: null,
-    ppcLeadAmountGoal: null,
-    seoLeadAmountGoal: null,
+    startDate: undefined,
+    endDate: undefined,
+    revenuePerPeriod: undefined,
+    totalRevenueGoal: undefined,
+    ppcRevenueGoal: undefined,
+    seoRevenueGoal: undefined,
+    totalLeadCostGoal: undefined,
+    ppcLeadCostGoal: undefined,
+    seoLeadCostGoal: undefined,
+    totalLeadAmountGoal: undefined,
+    ppcLeadAmountGoal: undefined,
+    seoLeadAmountGoal: undefined,
   })
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const {name, value} = e.target;
