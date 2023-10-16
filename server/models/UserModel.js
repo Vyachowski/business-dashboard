@@ -23,12 +23,12 @@ const User = sequelize.define('User', {
   },
   isActivated: {
     type: DataTypes.BOOLEAN,
-    default: false,
+    defaultValue: false,
     allowNull: false,
   },
   activationLink: {
     type: DataTypes.STRING,
-    default: "",
+    defaultValue: "",
     allowNull: false,
   }
 });
