@@ -6,14 +6,14 @@ dotenv.config();
 const secretKey = process.env.JWT_SECRET_KEY;
 
 function authenticateJWT(req, res, next) {
-  const accessToken = req.cookies.accessToken;
+  const accessToken = req.cookies.token;
   const refreshToken = req.cookies.refreshToken;
 
   if (!accessToken) {
     return res.status(401).json({ message: 'Access token not found' });
   }
 
-  jwt.verify(accessToken, secretKey, async (err, user) => {
+  jwt.verify(accessToken, secretKey, (err, user) => {
     if (err) {
       // Access token verification failed
       if (!refreshToken) {
@@ -26,10 +26,15 @@ function authenticateJWT(req, res, next) {
           return res.status(403).json({ message: 'Refresh token verification failed' });
         }
 
-        // Generate a new access token and attach with user info to the request
-        req.newAccessToken = jwt.sign({id: user.id, email: user.email}, secretKey, {
-          expiresIn: '1h',
+        // Generate a new access token
+        const newAccessToken = jwt.sign({ id: user.id, fullName: user.fullName }, secretKey, {
+          expiresIn: '1h', // New access token expires in 1 hour
         });
+
+        // Set the new access token as an HTTP cookie
+        res.cookie('accessToken', newAccessToken, { httpOnly: true });
+
+        // Attach the user information to the request
         req.user = user;
         next();
       });

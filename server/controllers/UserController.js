@@ -37,6 +37,9 @@ export async function registerUser(req, res) {
     expiresIn: '7d',
   });
 
+  res.cookie('accessToken', accessToken, { httpOnly: true });
+  res.cookie('refreshToken', refreshToken, { httpOnly: true });
+
   res.status(201).json({message: 'User registered successfully', accessToken, refreshToken});
 }
 
@@ -65,21 +68,41 @@ export async function loginUser(req, res) {
     expiresIn: '7d',
   });
 
+  res.cookie('accessToken', accessToken, { httpOnly: true });
+  res.cookie('refreshToken', refreshToken, { httpOnly: true });
+
   // Server response if successful
-  res.status(200).json({
-    message: 'Login successful',
-    accessToken: accessToken,
-    refreshToken: refreshToken,
-  });
+  res.status(200).json({ message: 'Login successful' });
 }
 
+export async function refreshToken(req, res) {
+  const refreshToken = req.cookies.refreshToken;
+
+  if (!refreshToken) {
+    return res.status(401).json({ message: 'Refresh token not found' });
+  }
+
+  jwt.verify(refreshToken, secretKey, (err, user) => {
+    if (err) {
+      return res.status(403).json({message: 'Refresh token verification failed'});
+    }
+
+    const accessToken = jwt.sign({id: user.id, email: user.email}, secretKey, {
+      expiresIn: '1h',
+    });
+
+    res.cookie('accessToken', accessToken, {httpOnly: true});
+
+    res.status(200).json({message: 'Token refreshed successfully'});
+  });
+}
 export async function getUserProfile(req, res) {
-  const newAccessToken = req.newAccessToken || null;
   const {id, email} = req.user;
   const user = await User.findByPk(id);
   const fullName = user.fullName;
-  res.status(200).json({id, fullName, email, newAccessToken});
+  res.status(200).json({id, fullName, email});
 }
+
 
 export async function getBusinessMetrics(req, res) {
   // const newAccessToken = req.newAccessToken || null;
