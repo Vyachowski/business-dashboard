@@ -98,17 +98,6 @@ const DataAddition = () => {
       if (response.status === 201) {
         console.log('Business metrics data was successfully added')
       }
-      console.log(
-        totalRevenueGoal,
-        ppcRevenueGoal,
-        seoRevenueGoal,
-        totalLeadCostGoal,
-        ppcLeadCostGoal,
-        seoLeadCostGoal,
-        totalLeadAmountGoal,
-        ppcLeadAmountGoal,
-        seoLeadAmountGoal,
-      );
     } catch (error) {
       console.error('Sorry, there was an error during business metrics data addition:', error);
     }

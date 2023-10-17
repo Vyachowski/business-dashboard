@@ -139,7 +139,6 @@ export async function getBusinessMetrics(req, res) {
 
 export async function addBusinessMetrics(req, res) {
   const { id } = req.user;
-  console.log(req.body)
   const {
     totalRevenueGoal,
     ppcRevenueGoal,
