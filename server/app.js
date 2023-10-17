@@ -6,6 +6,8 @@ import sequelize from "./config/database.js";
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -13,6 +15,8 @@ app.use(cors({
   origin: 'http://localhost:5174',
   credentials: true,
 }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use('/api/activities/', activitiesRouter);
 app.use('/api/revenue/', revenueRouter);

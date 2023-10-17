@@ -1,12 +1,16 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import {useState} from "react";
 import axios from "axios";
+// import start from "../../components/Start.tsx";
 
 const DataAddition = () => {
-  const [state, setState] = useState({
-    startDate: undefined,
-    endDate: undefined,
-    revenuePerPeriod: undefined,
+  const [revenueState, setRevenueState] = useState({
+    startDate: "2022-02-12",
+    endDate: "2023-02-12",
+    revenuePerPeriod: 100000,
+  })
+
+  const [businessMetricsState, setBusinessMetricsState] = useState({
     totalRevenueGoal: undefined,
     ppcRevenueGoal: undefined,
     seoRevenueGoal: undefined,
@@ -17,9 +21,17 @@ const DataAddition = () => {
     ppcLeadAmountGoal: undefined,
     seoLeadAmountGoal: undefined,
   })
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleRevenueInputChange = (e: { target: { name: any; value: any; }; }) => {
     const {name, value} = e.target;
-    setState(prevState => ({
+    setRevenueState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleBusinessMetricsInputChange = (e: { target: { name: any; value: any; }; }) => {
+    const {name, value} = e.target;
+    setBusinessMetricsState(prevState => ({
       ...prevState,
       [name]: value
     }));
@@ -31,13 +43,20 @@ const DataAddition = () => {
     const startDate = formData.get('startDate');
     const endDate = formData.get('endDate');
     const revenuePerPeriod = formData.get('revenuePerPeriod');
-  
+    console.log(startDate, endDate,revenuePerPeriod);
+
     try {
-      const response = await axios.post('http://localhost:3011/api/revenue/', {
-        startDate,
-        endDate,
-        revenuePerPeriod,
-      });
+      const response = await axios.post(
+        'http://localhost:3011/api/revenue/',
+        {
+          startDate,
+          endDate,
+          revenuePerPeriod,
+        },
+        {
+          withCredentials: true, // Включаем куки в запрос
+        }
+      );
 
       if (response.status === 201) {
         console.log('Revenue data was successfully added')
@@ -81,12 +100,12 @@ const DataAddition = () => {
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
-          {/* <!-- Income Form --> */}
+          {/* <!-- Revenue Form --> */}
           <div
             className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className="font-medium text-black dark:text-white">
-                Income entry
+                Revenue entry
               </h3>
             </div>
             <form name="incomeForm" onSubmit={handleRevenueAdditionForm}>
@@ -102,8 +121,8 @@ const DataAddition = () => {
                     type="date"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     id="data_addition-start-date"
-                    value={state.startDate}
-                    onChange={handleInputChange}
+                    value={revenueState.startDate}
+                    onChange={handleRevenueInputChange}
                     name="startDate"
                   />
                 </div>
@@ -118,8 +137,8 @@ const DataAddition = () => {
                     type="date"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     id="data_addition-end-date"
-                    value={state.endDate}
-                    onChange={handleInputChange}
+                    value={revenueState.endDate}
+                    onChange={handleRevenueInputChange}
                     name="endDate"
                   />
                 </div>
@@ -129,15 +148,15 @@ const DataAddition = () => {
                     className="mb-2.5 block text-black dark:text-white"
                     htmlFor="data_addition-income-sum"
                   >
-                    Enter income sum
+                    Enter revenue sum
                   </label>
                   <input
                     type="text"
                     placeholder="180 000"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     id="data_addition-income-sum"
-                    value={state.revenuePerPeriod}
-                    onChange={handleInputChange}
+                    value={revenueState.revenuePerPeriod}
+                    onChange={handleRevenueInputChange}
                     name="revenuePerPeriod"
                   />
                 </div>
@@ -175,8 +194,8 @@ const DataAddition = () => {
                         placeholder="300 000"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-revenue-total"
-                        value={state.totalRevenueGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.totalRevenueGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="totalRevenueGoal"
                       />
                     </div>
@@ -194,8 +213,8 @@ const DataAddition = () => {
                         placeholder="150 000"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-revenue-ppc"
-                        value={state.ppcRevenueGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.ppcRevenueGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="ppcRevenueGoal"
                       />
                     </div>
@@ -213,16 +232,17 @@ const DataAddition = () => {
                         placeholder="150 000"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-revenue-seo"
-                        value={state.seoRevenueGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.seoRevenueGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="seoRevenueGoal"
                       />
                     </div>
                   </div>
                 </fieldset>
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
+                  {/* All goals are set for the year */}
+                  <legend className="mb-2.5">Lead cost goals</legend>
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Lead cost goals</legend>
                     <div className="mb-4.5">
                       <label
                         className="mb-2.5 block text-black dark:text-white"
@@ -235,8 +255,8 @@ const DataAddition = () => {
                         placeholder="275"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-lead-cost-total"
-                        value={state.totalLeadCostGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.totalLeadCostGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="totalLeadCostGoal"
                       />
                     </div>
@@ -254,8 +274,8 @@ const DataAddition = () => {
                         placeholder="400"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-lead-cost-ppc"
-                        value={state.ppcLeadCostGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.ppcLeadCostGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="ppcLeadCostGoal"
                       />
                     </div>
@@ -273,16 +293,17 @@ const DataAddition = () => {
                         placeholder="150"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-lead-cost-seo"
-                        value={state.seoLeadCostGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.seoLeadCostGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="seoLeadCostGoal"
                       />
                     </div>
                   </div>
                 </fieldset>
                 <fieldset className="grid grid-cols-3 gap-4 items-end">
+                  {/* All goals are set for the year */}
+                  <legend className="mb-2.5">Lead amount goals</legend>
                   <div className="col-span-1">
-                    <legend className="mb-2.5">Lead amount goals</legend>
                     <div className="mb-4.5">
                       <label
                         className="mb-2.5 block text-black dark:text-white"
@@ -295,8 +316,8 @@ const DataAddition = () => {
                         placeholder="500"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-lead-amount-total"
-                        value={state.totalLeadAmountGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.totalLeadAmountGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="totalLeadAmountGoal"
                       />
                     </div>
@@ -314,8 +335,8 @@ const DataAddition = () => {
                         placeholder="250"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-lead-amount-ppc"
-                        value={state.ppcLeadAmountGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.ppcLeadAmountGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="ppcLeadAmountGoal"
                       />
                     </div>
@@ -333,8 +354,8 @@ const DataAddition = () => {
                         placeholder="250"
                         className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         id="data_addition-lead-amount-seo"
-                        value={state.seoLeadAmountGoal}
-                        onChange={handleInputChange}
+                        value={businessMetricsState.seoLeadAmountGoal}
+                        onChange={handleBusinessMetricsInputChange}
                         name="seoLeadAmountGoal"
                       />
                     </div>

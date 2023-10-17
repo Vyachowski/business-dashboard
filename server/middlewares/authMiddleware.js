@@ -2,13 +2,11 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
 const secretKey = process.env.JWT_SECRET_KEY;
 
 function authenticateJWT(req, res, next) {
   const accessToken = req.cookies.accessToken;
   const refreshToken = req.cookies.refreshToken;
-
   if (!accessToken) {
     return res.status(401).json({ message: 'Access token not found' });
   }

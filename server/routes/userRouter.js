@@ -1,14 +1,15 @@
-import {
-  registerUser, loginUser, getUserProfile, getBusinessMetrics, addBusinessMetrics, logoutUser,
-} from '../controllers/userController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
+import {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  getBusinessMetrics,
+  addBusinessMetrics,
+  logoutUser,
+} from '../controllers/userController.js';
 import express from 'express';
 
 const router = express.Router();
-router.use(bodyParser.json());
-router.use(cookieParser());
 
 router.post('/sign-up/', registerUser);
 router.post('/sign-in/', loginUser);
