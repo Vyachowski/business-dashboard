@@ -1,13 +1,12 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import AuthContext from "../../components/AuthContext.tsx";
+import AuthContext from '../../components/AuthContext';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import {Link, useNavigate} from 'react-router-dom';
 import React, {useContext, useState} from 'react';
 import Logo from '../../images/logo/logo.svg';
-import axios from "axios";
 
 const SignIn: React.FC = () => {
-  const { login } = useContext(AuthContext);
+  const {handleLogin} = useContext(AuthContext);
   const navigate = useNavigate();
   const [state, setState] = useState({
     email: "selva@mail.ru",
@@ -28,21 +27,11 @@ const SignIn: React.FC = () => {
     const email = formData.get('email');
     const password = formData.get('password');
 
-    if (password) {
+    if (email && password) {
       try {
-        const response = await axios.post('http://localhost:3011/api/user/sign-in/', {
-          email: email,
-          password: password,
-        });
-
-        if (response.status === 200) {
-
-          const { accessToken, refreshToken } = response.data;
-
-          login(accessToken, refreshToken);
-
-          navigate('/');
-        }
+        handleLogin(email, password);
+        navigate('/');
+        window.location.reload();
       } catch (error) {
         console.error('Sorry:', error);
       }
@@ -320,7 +309,7 @@ const SignIn: React.FC = () => {
                 <div className="mt-6 text-center">
                   <p>
                     Don’t have any account?{' '}
-                    <Link to="/auth/signup" className="text-primary">
+                    <Link to="/auth/sign-up" className="text-primary">
                       Sign Up
                     </Link>
                   </p>

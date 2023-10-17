@@ -1,100 +1,65 @@
-import {createContext, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
+import axios from "axios";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [accessToken, setAccessToken] = useState(null);
-  const [refreshToken, setRefreshToken] = useState(null);
-  const prevAccessToken = localStorage.getItem('accessToken');
-  const prevRefreshToken = localStorage.getItem('refreshToken');
+  const [profile, setProfile] = useState({
+    id: undefined,
+    fullName: undefined,
+    email: undefined,
+  });
 
-  if (prevAccessToken && prevRefreshToken) {
-    setAccessToken(prevAccessToken);
-    setRefreshToken(prevRefreshToken);
-    return;
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3011/api/user/profile', {
+          withCredentials: true,
+        });
 
-  // After successful login
-  const handleLogin = (newAccessToken: string, newRefreshToken: string) => {
-    setAccessToken(newAccessToken);
-    setAccessToken(newRefreshToken);
-    localStorage.setItem('accessToken', newAccessToken);
-    localStorage.setItem('refreshToken', newRefreshToken);
+        if (response.status === 200) {
+          const { fullName, email, id } = response.data;
+          setProfile({ fullName, email, id });
+        }
+      } catch (error) {
+        console.error('Error while loading user profile:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleLogin = async (email, password) => {
+    try {
+      await axios.post('http://localhost:3011/api/user/sign-in/', {
+        email,
+        password,
+      }, {
+        withCredentials: true,
+      });
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
-  // When the user logs out
-  const handleLogout = () => {
-    setAccessToken(null);
-    setRefreshToken(null);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:3011/api/user/sign-out/', null, {
+        withCredentials: true,
+      });
+
+      setProfile({
+        id: undefined,
+        fullName: undefined,
+        email: undefined,
+      });
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
   };
-
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [profile, setProfile] = useState({
-  //   fullName: null,
-  //   email: null,
-  //   id: null,
-  // });
-
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem('accessToken');
-  //   const refreshToken = localStorage.getItem('refreshToken');
-  //
-  //   if (accessToken && refreshToken) {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get('http://localhost:3011/api/user/profile', {
-  //           withCredentials: true,
-  //         });
-  //
-  //         if (response.status === 200) {
-  //           const { fullName, email, id } = response.data;
-  //
-  //           setIsAuthenticated(true);
-  //           setProfile({ fullName, email, id });
-  //         }
-  //       } catch (error) {
-  //         console.error('Error while loading user profile:', error);
-  //       }
-  //     };
-  //
-  //     fetchData();
-  //   }
-  // }, []);
-
-  // const login = async (accessToken: string, refreshToken: string) => {
-  //   localStorage.setItem('accessToken', accessToken);
-  //   localStorage.setItem('refreshToken', refreshToken);
-  //
-  //   document.cookie = `accessToken=${accessToken}; path=/`;
-  //   document.cookie = `refreshToken=${refreshToken}; path=/`;
-  //
-  //   const response = await axios.get('http://localhost:3011/api/user/profile', {
-  //     withCredentials: true
-  //   });
-  //   if (response.status === 200) {
-  //     const {fullName, email, id} = response.data;
-  //
-  //     setIsAuthenticated(true);
-  //     setProfile({fullName, email, id});
-  //   }
-  // };
-
-  // const logout = () => {
-  //   localStorage.removeItem('accessToken');
-  //   localStorage.removeItem('refreshToken');
-  //
-  //   setIsAuthenticated(false);
-  //   setProfile({
-  //     fullName: null,
-  //     email: null,
-  //     id: null,
-  //   });
-  // };
 
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout, accessToken, refreshToken }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, profile }}>
       {children}
     </AuthContext.Provider>
   );

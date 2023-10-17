@@ -1,5 +1,5 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import AuthContext from "../../components/AuthContext.tsx";
+import AuthContext from '../../components/AuthContext';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import {Link, useNavigate} from 'react-router-dom';
 import React, {useContext, useState} from 'react';
@@ -7,8 +7,9 @@ import Logo from '../../images/logo/logo.svg';
 import axios from "axios";
 
 const SignUp: React.FC = () => {
-  const { login } = useContext(AuthContext);
+  const {handleLogin} = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [state, setState] = useState({
     fullName: "Selva Chaikin",
     email: "selva@mail.ru",
@@ -41,11 +42,9 @@ const SignUp: React.FC = () => {
         });
 
         if (response.status === 201) {
-          const { accessToken, refreshToken } = response.data;
-
-          login(accessToken, refreshToken);
-
+          handleLogin(email, password);
           navigate('/');
+          window.location.reload();
         }
       } catch (error) {
         console.error('Error occurred during the process:', error);
@@ -398,7 +397,7 @@ const SignUp: React.FC = () => {
                 <div className="mt-6 text-center">
                   <p>
                     Already have an account?{' '}
-                    <Link to="/auth/signin" className="text-primary">
+                    <Link to="/auth/sign-in" className="text-primary">
                       Sign in
                     </Link>
                   </p>

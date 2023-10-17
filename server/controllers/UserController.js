@@ -45,7 +45,6 @@ export async function registerUser(req, res) {
 
 export async function loginUser(req, res) {
   const {email, password} = req.body;
-
   // Find the user with the given email
   const user = await User.findOne({
     where: {
@@ -70,7 +69,6 @@ export async function loginUser(req, res) {
 
   res.cookie('accessToken', accessToken, { httpOnly: true });
   res.cookie('refreshToken', refreshToken, { httpOnly: true });
-
   // Server response if successful
   res.status(200).json({ message: 'Login successful' });
 }
@@ -96,6 +94,14 @@ export async function refreshToken(req, res) {
     res.status(200).json({message: 'Token refreshed successfully'});
   });
 }
+
+export async function logoutUser(req, res) {
+  res.clearCookie('token');
+  res.clearCookie('accessToken');
+  res.clearCookie('refreshToken');
+  res.status(200).json({ message: 'Logout successful' });
+}
+
 export async function getUserProfile(req, res) {
   const {id, email} = req.user;
   const user = await User.findByPk(id);

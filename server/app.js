@@ -17,7 +17,7 @@ app.use(cors({
 app.use('/api/activities/', activitiesRouter);
 app.use('/api/revenue/', revenueRouter);
 app.use('/api/leads/', leadsRouter);
-app.use('/api/user/', userRouter);
+app.use('/api/user/', userRouter)
 
 sequelize.sync({ force: false })
   .then(() => {

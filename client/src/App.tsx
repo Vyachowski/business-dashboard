@@ -64,7 +64,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/auth/signin"
+                        path="/auth/sign-in"
                         element={
                             <>
                                 <PageTitle title="Signin | Insightful - Valuable ideas from your marketing data" />
@@ -73,7 +73,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/auth/signup"
+                        path="/auth/sign-up"
                         element={
                             <>
                                 <PageTitle title="Signup | Insightful - Valuable ideas from your marketing data" />

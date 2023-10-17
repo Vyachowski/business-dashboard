@@ -102,6 +102,7 @@ export async function refreshTokens(req, res) {
 
 export async function logoutUser(req, res) {
   res.clearCookie('token');
+  res.clearCookie('accessToken');
   res.clearCookie('refreshToken');
   res.status(200).json({ message: 'Logout successful' });
 }

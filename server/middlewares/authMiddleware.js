@@ -6,7 +6,7 @@ dotenv.config();
 const secretKey = process.env.JWT_SECRET_KEY;
 
 function authenticateJWT(req, res, next) {
-  const accessToken = req.cookies.token;
+  const accessToken = req.cookies.accessToken;
   const refreshToken = req.cookies.refreshToken;
 
   if (!accessToken) {

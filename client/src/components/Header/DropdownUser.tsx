@@ -4,11 +4,11 @@ import UserOne from '../../images/user/user-01.png';
 import AuthContext from '../AuthContext.tsx';
 
 const DropdownUser = () => {
-  const { profile, isAuthenticated, logout } = useContext(AuthContext);
+  const { handleLogout, profile } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const handleSignInClick = () => {
-    navigate('/auth/signin');
+    navigate('/auth/sign-in');
   };
 
   const trigger = useRef<any>(null);
@@ -40,12 +40,14 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  const handleLogout = () => {
-    logout();
-  };
+  const logout = () => {
+    handleLogout();
+    navigate('/');
+    window.location.reload();
+  }
 
   return (
-    isAuthenticated
+    profile.id
       ? <div className="relative">
       <Link
         ref={trigger}
@@ -90,7 +92,8 @@ const DropdownUser = () => {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base" onClick={handleLogout}>
+        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+                onClick={logout}>
           <svg
             className="fill-current"
             width="22"
