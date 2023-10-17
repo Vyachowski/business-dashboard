@@ -11,15 +11,15 @@ const DataAddition = () => {
   })
 
   const [businessMetricsState, setBusinessMetricsState] = useState({
-    totalRevenueGoal: undefined,
-    ppcRevenueGoal: undefined,
-    seoRevenueGoal: undefined,
-    totalLeadCostGoal: undefined,
-    ppcLeadCostGoal: undefined,
-    seoLeadCostGoal: undefined,
-    totalLeadAmountGoal: undefined,
-    ppcLeadAmountGoal: undefined,
-    seoLeadAmountGoal: undefined,
+    totalRevenueGoal: 300000,
+    ppcRevenueGoal: 150000,
+    seoRevenueGoal: 150000,
+    totalLeadCostGoal: 275,
+    ppcLeadCostGoal: 400,
+    seoLeadCostGoal: 150,
+    totalLeadAmountGoal: 500,
+    ppcLeadAmountGoal: 250,
+    seoLeadAmountGoal: 250,
   })
   const handleRevenueInputChange = (e: { target: { name: any; value: any; }; }) => {
     const {name, value} = e.target;
@@ -43,7 +43,6 @@ const DataAddition = () => {
     const startDate = formData.get('startDate');
     const endDate = formData.get('endDate');
     const revenuePerPeriod = formData.get('revenuePerPeriod');
-    console.log(startDate, endDate,revenuePerPeriod);
 
     try {
       const response = await axios.post(
@@ -54,7 +53,7 @@ const DataAddition = () => {
           revenuePerPeriod,
         },
         {
-          withCredentials: true, // Включаем куки в запрос
+          withCredentials: true,
         }
       );
 
@@ -68,29 +67,50 @@ const DataAddition = () => {
   const handleBusinessMetricsForm = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const totalRevenue = formData.get('totalRevenue');
-    const ppcRevenue = formData.get('ppcRevenue');
-    const seoRevenue = formData.get('seoRevenue');
-    const totalLeadCost = formData.get('totalLeadCost');
-    const ppcLeadCost = formData.get('ppcLeadCost');
-    const seoLeadCost = formData.get('seoLeadCost');
-    const totalLeadAmount = formData.get('totalLeadAmount');
-    const ppcLeadAmount = formData.get('ppcLeadAmount');
-    const seoLeadAmount = formData.get('seoLeadAmount');
+    const totalRevenueGoal = formData.get('totalRevenueGoal');
+    const ppcRevenueGoal = formData.get('ppcRevenueGoal');
+    const seoRevenueGoal = formData.get('seoRevenueGoal');
+    const totalLeadCostGoal = formData.get('totalLeadCostGoal');
+    const ppcLeadCostGoal = formData.get('ppcLeadCostGoal');
+    const seoLeadCostGoal = formData.get('seoLeadCostGoal');
+    const totalLeadAmountGoal = formData.get('totalLeadAmountGoal');
+    const ppcLeadAmountGoal = formData.get('ppcLeadAmountGoal');
+    const seoLeadAmountGoal = formData.get('seoLeadAmountGoal');
+
     try {
+      const response = await axios.post(
+        'http://localhost:3011/api/user/business-metrics/',
+        {
+          totalRevenueGoal,
+          ppcRevenueGoal,
+          seoRevenueGoal,
+          totalLeadCostGoal,
+          ppcLeadCostGoal,
+          seoLeadCostGoal,
+          totalLeadAmountGoal,
+          ppcLeadAmountGoal,
+          seoLeadAmountGoal,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 201) {
+        console.log('Business metrics data was successfully added')
+      }
       console.log(
-        totalRevenue,
-        ppcRevenue,
-        seoRevenue,
-        totalLeadCost,
-        ppcLeadCost,
-        seoLeadCost,
-        totalLeadAmount,
-        ppcLeadAmount,
-        seoLeadAmount,
+        totalRevenueGoal,
+        ppcRevenueGoal,
+        seoRevenueGoal,
+        totalLeadCostGoal,
+        ppcLeadCostGoal,
+        seoLeadCostGoal,
+        totalLeadAmountGoal,
+        ppcLeadAmountGoal,
+        seoLeadAmountGoal,
       );
     } catch (error) {
-      console.error('Sorry:', error);
+      console.error('Sorry, there was an error during business metrics data addition:', error);
     }
   }
 

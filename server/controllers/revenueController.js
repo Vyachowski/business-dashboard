@@ -43,8 +43,8 @@ export async function getRevenueByPeriod(req, res) {
 }
 
 export async function postRevenueByPeriod(req, res) {
+  const {id} =req.user;
   const {startDate, endDate, revenuePerPeriod} = req.body;
-  console.log(req.body);
   if (!startDate || !endDate) {
     return res.status(400).json({error: 'Please, define a period of time.'});
   }
@@ -58,7 +58,7 @@ export async function postRevenueByPeriod(req, res) {
 
   try {
     for (let currentDate = formattedStartDate; currentDate <= formattedEndDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      await Revenue.create({date: currentDate, profit: revenuePerDay, currency: 'Rub'});
+      await Revenue.create({date: currentDate, profit: revenuePerDay, currency: 'Rub', userId: id});
       console.log(`Added: Date: ${currentDate}, Profit: ${revenuePerDay}, Currency: Rub`);
     }
     console.log('Successfully updated.');

@@ -111,7 +111,6 @@ export async function getUserProfile(req, res) {
 
 
 export async function getBusinessMetrics(req, res) {
-  // const newAccessToken = req.newAccessToken || null;
   const {id} = req.user;
   const businessMetrics = await BusinessMetrics.findByPk(id);
   const {
@@ -140,29 +139,30 @@ export async function getBusinessMetrics(req, res) {
 
 export async function addBusinessMetrics(req, res) {
   const { id } = req.user;
+  console.log(req.body)
   const {
-    totalRevenue,
-    ppcRevenue,
-    seoRevenue,
-    totalLeadCost,
-    ppcLeadCost,
-    seoLeadCost,
-    totalLeadAmount,
-    ppcLeadAmount,
-    seoLeadAmount,
+    totalRevenueGoal,
+    ppcRevenueGoal,
+    seoRevenueGoal,
+    totalLeadCostGoal,
+    ppcLeadCostGoal,
+    seoLeadCostGoal,
+    totalLeadAmountGoal,
+    ppcLeadAmountGoal,
+    seoLeadAmountGoal,
   } = req.body;
 
   BusinessMetrics.create({
     userId: id,
-    totalRevenue: totalRevenue,
-    ppcRevenue: ppcRevenue,
-    seoRevenue: seoRevenue,
-    totalLeadCost: totalLeadCost,
-    ppcLeadCost: ppcLeadCost,
-    seoLeadCost: seoLeadCost,
-    totalLeadAmount: totalLeadAmount,
-    ppcLeadAmount: ppcLeadAmount,
-    seoLeadAmount: seoLeadAmount,
+    totalRevenueGoal,
+    ppcRevenueGoal,
+    seoRevenueGoal,
+    totalLeadCostGoal,
+    ppcLeadCostGoal,
+    seoLeadCostGoal,
+    totalLeadAmountGoal,
+    ppcLeadAmountGoal,
+    seoLeadAmountGoal,
   }).then((businessMetric) => {
     console.log('New business metrics record created:', businessMetric);
   }).catch((error) => {

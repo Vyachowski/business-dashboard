@@ -6,42 +6,42 @@ const BusinessMetrics = sequelize.define('BusinessMetrics', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: false,
+    autoIncrement: true,
     allowNull: false,
   },
-  totalRevenue: {
+  totalRevenueGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  ppcRevenue: {
+  ppcRevenueGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  seoRevenue: {
+  seoRevenueGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  totalLeadCost: {
+  totalLeadCostGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  ppcLeadCost: {
+  ppcLeadCostGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  seoLeadCost: {
+  seoLeadCostGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  totalLeadAmount: {
+  totalLeadAmountGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  ppc_lead_amount: {
+  ppcLeadAmountGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
-  seoLeadAmount: {
+  seoLeadAmountGoal: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },
