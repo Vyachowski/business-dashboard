@@ -1,61 +1,62 @@
-# Development stages
+# Project Title
 
-## Step 1
+Simple overview of use/purpose.
 
-> ### Product
-> A platform designed for small business owners
-> to analyze marketing data and gain valuable insights
-#### Features
-- Authentication via username/password
-- Connectors to Universal Analytics and Yandex Metrics
-- Connectors to Yandex Direct and Google Ads
-- All key metrics on one screen
-- Option to add your insight and tasks for it
+## Description
 
-### To-do List
+An in-depth paragraph about your project and overview of use.
 
-#### Design
-- [x] Dashboard template
-- [x] Sign in/Sign up pages
-- [x] Inner pages
+## Getting Started
 
-#### Backend
-###### Authentication
-- [x] User registration via email/password
-- [x] User login
-- [x] Create and refresh access token
-###### Income endpoint
-- [x] Add income (defined period of time)
-- [x] Get income data (total and daily)
-###### Connectors to third-party API
-- [ ] Create connector to Yandex ID API (and Metric and Direct inside)
+### Dependencies
 
-#### Frontend
-###### Registration and logging in
-- [x] Create welcome page (Desktop)
-- [x] Create sign-up page (Desktop)
-- [x] Create sign-in page (Desktop)
-###### Main page
-- [x] Dashboard page (Desktop)
-###### Analytics pages
-- [x] Insights page (Desktop)
-- [x] Tasks page (Desktop)
-- [x] SEO traffic page (Desktop)
-- [x] PPC traffic page (Desktop)
-###### Entry form
-- [x] Income entry page with a form to post data (Desktop)
+* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
+* ex. Windows 10
 
-## Branch Naming Convention
+### Installing
 
-- **main** for the current version of site
-- **develop** is for developing new features, test and refactor them
+* How/where to download your program
+* Any modifications needed to be made to files/folders
 
-## Commit Naming Convention
+### Executing program
 
-A commit message should start with a category of change. You can pretty much use the following 4 categories for everything: feat, fix, refactor, and chore.
+* How to run the program
+* Step-by-step bullets
+```
+code blocks for commands
+```
 
-- **feat** is for adding a new feature
-- **fix** is for fixing a bug
-- **refactor** is for changing code for peformance or convenience purpose (e.g. readibility)
-- **chore** is for everything else (writing documentation, formatting, adding tests, cleaning useless code etc.)
-- e.g. ```git commit -m 'feat: add new button component; add new button components to templates'```
+## Help
+
+Any advise for common problems or issues.
+```
+command to run if program contains helper info
+```
+
+## Authors
+
+Contributors names and contact info
+
+ex. Dominique Pizzie  
+ex. [@DomPizzie](https://twitter.com/dompizzie)
+
+## Version History
+
+* 0.2
+    * Various bug fixes and optimizations
+    * See [commit change]() or See [release history]()
+* 0.1
+    * Initial Release
+
+## License
+
+This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.
+* [awesome-readme](https://github.com/matiassingers/awesome-readme)
+* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [dbader](https://github.com/dbader/readme-template)
+* [zenorocha](https://gist.github.com/zenorocha/4526327)
+* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
