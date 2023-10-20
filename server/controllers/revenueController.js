@@ -43,10 +43,11 @@ export async function getRevenueByPeriod(req, res) {
 }
 
 export async function postRevenueByPeriod(req, res) {
-  const {id} =req.user;
-  const {startDate, endDate, seoRevenuePerPeriod, ppcRevenuePerPeriod} = req.body;
+  const { id } = req.user;
+  const { startDate, endDate, seoRevenuePerPeriod, ppcRevenuePerPeriod } = req.body;
+
   if (!startDate || !endDate) {
-    return res.status(400).json({error: 'Please, define a period of time.'});
+    return res.status(400).json({ error: 'Please, define a period of time.' });
   }
 
   const formattedStartDate = new Date(startDate);
@@ -54,12 +55,29 @@ export async function postRevenueByPeriod(req, res) {
   const differenceInMilliseconds = Math.abs(formattedStartDate - formattedEndDate);
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
   const differenceInDays = Math.floor(differenceInMilliseconds / millisecondsPerDay) + 1;
-  const revenuePerDay = Math.ceil(Number(revenuePerPeriod) / differenceInDays);
+
+  const seoRevenuePerDay = Math.ceil(Number(seoRevenuePerPeriod) / differenceInDays);
+  const ppcRevenuePerDay = Math.ceil(Number(ppcRevenuePerPeriod) / differenceInDays);
 
   try {
     for (let currentDate = formattedStartDate; currentDate <= formattedEndDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      await Revenue.create({date: currentDate, profit: revenuePerDay, currency: 'Rub', userId: id});
-      console.log(`Added: Date: ${currentDate}, Profit: ${revenuePerDay}, Currency: Rub`);
+      await Revenue.create({
+        date: currentDate,
+        profit: seoRevenuePerDay,
+        source: 'SEO',
+        currency: 'Rub',
+        userId: id
+      });
+      console.log(`Added: Date: ${currentDate}, Profit: ${seoRevenuePerDay}, Source: SEO, Currency: Rub`);
+
+      await Revenue.create({
+        date: currentDate,
+        profit: ppcRevenuePerDay,
+        source: 'PPC',
+        currency: 'Rub',
+        userId: id
+      });
+      console.log(`Added: Date: ${currentDate}, Profit: ${ppcRevenuePerDay}, Source: PPC, Currency: Rub`);
     }
     console.log('Successfully updated.');
   } catch (error) {
