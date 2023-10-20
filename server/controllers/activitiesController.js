@@ -19,14 +19,14 @@ async function getInsights(req, res) {
 }
 
 async function postInsight(req, res) {
-  const insightValue = req.insightValue;
+  const {insightDescription} = req.body;
   const currentUserId = req.user.id;
 
   try {
     Activity.create({
       userId: currentUserId,
       type: 'insight',
-      value: insightValue,
+      value: insightDescription,
       }
     );
     res.status(200).json({ message: "Insight successfully added." });
@@ -68,14 +68,14 @@ async function getTasks(req, res) {
 }
 
 async function postTask(req, res) {
-  const taskValue = req.taskValue;
+  const {taskDescription} = req.body;
   const currentUserId = req.user.id;
 
   try {
     Activity.create({
         userId: currentUserId,
         type: 'task',
-        value: taskValue,
+        value: taskDescription,
       }
     );
     res.status(200).json({ message: "Task successfully added." });
