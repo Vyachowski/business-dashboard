@@ -5,9 +5,10 @@ import axios from "axios";
 
 const DataAddition = () => {
   const [revenueState, setRevenueState] = useState({
-    startDate: "2022-02-12",
-    endDate: "2023-02-12",
-    revenuePerPeriod: 100000,
+    startDate: "2022-02-15",
+    endDate: "2023-02-15",
+    seoRevenuePerPeriod: 100000,
+    ppcRevenuePerPeriod: 100000,
   })
 
   const [businessMetricsState, setBusinessMetricsState] = useState({
@@ -42,7 +43,8 @@ const DataAddition = () => {
     const formData = new FormData(e.target);
     const startDate = formData.get('startDate');
     const endDate = formData.get('endDate');
-    const revenuePerPeriod = formData.get('revenuePerPeriod');
+    const seoRevenuePerPeriod = formData.get('seoRevenuePerPeriod');
+    const ppcRevenuePerPeriod = formData.get('ppcReoRevenuePerPeriod');
 
     try {
       const response = await axios.post(
@@ -50,7 +52,8 @@ const DataAddition = () => {
         {
           startDate,
           endDate,
-          revenuePerPeriod,
+          seoRevenuePerPeriod,
+          ppcRevenuePerPeriod
         },
         {
           withCredentials: true,
@@ -157,14 +160,32 @@ const DataAddition = () => {
                     className="mb-2.5 block text-black dark:text-white"
                     htmlFor="data_addition-income-sum"
                   >
-                    Enter revenue sum
+                    Enter SEO revenue sum
                   </label>
                   <input
                     type="text"
                     placeholder="180 000"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     id="data_addition-income-sum"
-                    value={revenueState.revenuePerPeriod}
+                    value={revenueState.seoRevenuePerPeriod}
+                    onChange={handleRevenueInputChange}
+                    name="revenuePerPeriod"
+                  />
+                </div>
+
+                <div className="mb-4.5">
+                  <label
+                    className="mb-2.5 block text-black dark:text-white"
+                    htmlFor="data_addition-income-sum"
+                  >
+                    Enter PPC revenue sum
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="180 000"
+                    className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    id="data_addition-income-sum"
+                    value={revenueState.ppcRevenuePerPeriod}
                     onChange={handleRevenueInputChange}
                     name="revenuePerPeriod"
                   />

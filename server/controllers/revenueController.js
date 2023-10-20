@@ -44,7 +44,7 @@ export async function getRevenueByPeriod(req, res) {
 
 export async function postRevenueByPeriod(req, res) {
   const {id} =req.user;
-  const {startDate, endDate, revenuePerPeriod} = req.body;
+  const {startDate, endDate, seoRevenuePerPeriod, ppcRevenuePerPeriod} = req.body;
   if (!startDate || !endDate) {
     return res.status(400).json({error: 'Please, define a period of time.'});
   }
