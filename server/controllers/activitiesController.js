@@ -39,17 +39,17 @@ async function deleteInsight(req, res) {
   const { insightId } = req.params;
 
   try {
-    const deletedTaskCount = await Activity.destroy({
+    const deletedInsightCount = await Activity.destroy({
       where: {
         id: insightId
       }
     });
 
-    if (deletedTaskCount === 0) {
-      return res.status(404).json({ message: 'Task not found.' });
+    if (deletedInsightCount === 0) {
+      return res.status(404).json({ message: 'Insight not found.' });
     }
 
-    res.status(200).json({ message: 'Task successfully deleted.' });
+    res.status(200).json({ message: 'Insight successfully deleted.' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error.' });
