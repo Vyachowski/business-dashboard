@@ -12,7 +12,7 @@ const TaskPopup: React.FC<TaskPopupProps> = (props) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3011/api/activities/insights/', {
+      const response = await axios.post('http://localhost:3011/api/activities/tasks/', {
         taskDescription: taskDescription
       }, {
         withCredentials: true

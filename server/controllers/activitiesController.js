@@ -36,16 +36,23 @@ async function postInsight(req, res) {
 }
 
 async function deleteInsight(req, res) {
-  const insightId = req.insightId;
+  const { insightId } = req.params;
 
   try {
-    Activity.delete({
-        id: insightId,
+    const deletedTaskCount = await Activity.destroy({
+      where: {
+        id: insightId
       }
-    );
-    res.status(200).json({ message: 'Insight successfully deleted.' });
+    });
+
+    if (deletedTaskCount === 0) {
+      return res.status(404).json({ message: 'Task not found.' });
+    }
+
+    res.status(200).json({ message: 'Task successfully deleted.' });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error.' });
   }
 }
 
@@ -72,7 +79,7 @@ async function postTask(req, res) {
   const currentUserId = req.user.id;
 
   try {
-    Activity.create({
+    await Activity.create({
         userId: currentUserId,
         type: 'task',
         value: taskDescription,
@@ -85,16 +92,23 @@ async function postTask(req, res) {
 }
 
 async function deleteTask(req, res) {
-  const taskId = req.taskId;
+  const { taskId } = req.params;
 
   try {
-    Activity.delete({
-        id: taskId,
+    const deletedTaskCount = await Activity.destroy({
+      where: {
+        id: taskId
       }
-    );
+    });
+
+    if (deletedTaskCount === 0) {
+      return res.status(404).json({ message: 'Task not found.' });
+    }
+
     res.status(200).json({ message: 'Task successfully deleted.' });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error.' });
   }
 }
 

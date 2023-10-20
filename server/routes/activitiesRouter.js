@@ -14,10 +14,10 @@ const router = express.Router();
 
 router.use(bodyParser.json());
 
-router.delete('/insights/', authMiddleware, deleteInsight);
+router.delete('/insights/:insightId', authMiddleware, deleteInsight);
 router.post('/insights/', authMiddleware, postInsight);
 router.get('/insights/', authMiddleware, getInsights);
-router.delete('/tasks/', authMiddleware, deleteTask);
+router.delete('/tasks/:taskId', authMiddleware, deleteTask);
 router.post('/tasks/', authMiddleware, postTask);
 router.get('/tasks/', authMiddleware, getTasks);
 
