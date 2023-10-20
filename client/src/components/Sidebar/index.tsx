@@ -538,28 +538,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Sign Up
                             </NavLink>
                           </li>
-                          {/*<li>*/}
-                          {/*  <NavLink*/}
-                          {/*      to="/auth/integrations"*/}
-                          {/*      className={({ isActive }) =>*/}
-                          {/*          'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +*/}
-                          {/*          (isActive && '!text-white')*/}
-                          {/*      }*/}
-                          {/*  >*/}
-                          {/*    Integrations*/}
-                          {/*  </NavLink>*/}
-                          {/*</li>*/}
-                          {/*<li>*/}
-                          {/*  <NavLink*/}
-                          {/*    to="/auth/reset-password"*/}
-                          {/*    className={({ isActive }) =>*/}
-                          {/*      'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +*/}
-                          {/*      (isActive && '!text-white')*/}
-                          {/*    }*/}
-                          {/*  >*/}
-                          {/*    Reset Password*/}
-                          {/*  </NavLink>*/}
-                          {/*</li>*/}
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
