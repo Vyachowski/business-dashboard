@@ -39,7 +39,6 @@ const InsightTaskList: React.FC = () => {
     })
       .then(() => {
         setTasks(insights.filter(insight => insight.id !== insightId));
-        console.log('Wow!!')
       })
       .catch(error => {
         console.error('Error deleting insight:', error);
