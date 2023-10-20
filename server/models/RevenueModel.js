@@ -3,18 +3,29 @@ import sequelize from "../config/database.js";
 import User from "./UserModel.js";
 
 const Revenue = sequelize.define('Revenue', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
   date: {
     type: DataTypes.DATEONLY,
-    primaryKey: true,
     allowNull: false,
-    unique: {
-      name: 'uniqueDatePerUser',
-      msg: 'Date must be unique per user'
-    }
   },
   profit: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  source: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isIn: {
+        args: [['SEO', 'PPC']],
+        msg: "Source must be either 'SEO' or 'PPC'"
+      }
+    }
   },
   currency: {
     type: DataTypes.STRING,
