@@ -5,7 +5,7 @@ import InsightsHeader from "../../components/InsightsHeader.tsx";
 import TaskHeader from '../../components/TaskHeader';
 import Drag from '../../js/drag.js';
 
-const TaskList: React.FC = () => {
+const InsightTaskList: React.FC = () => {
   useEffect(() => {
     Drag();
   });
@@ -272,4 +272,4 @@ const TaskList: React.FC = () => {
   );
 };
 
-export default TaskList;
+export default InsightTaskList;

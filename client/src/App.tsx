@@ -2,7 +2,7 @@ import { lazy, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Overview from './pages/Dashboard/Overview';
-import TaskList from './pages/Task/TaskList';
+import InsightTaskList from './pages/Task/InsightTaskList.tsx';
 import DataAddition from './pages/ManualDataEntry/DataAddition';
 import ErrorPage from './pages/Pages/ErrorPage';
 import ResetPassword from './pages/Authentication/ResetPassword';
@@ -37,11 +37,11 @@ function App() {
                         }
                     />
                     <Route
-                        path="/tasks/task-list"
+                        path="/activities/insight-task-list"
                         element={
                             <>
                                 <PageTitle title="Task List | Insightful - Valuable ideas from your marketing data" />
-                                <TaskList />
+                                <InsightTaskList />
                             </>
                         }
                     />
