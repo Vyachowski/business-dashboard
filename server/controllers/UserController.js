@@ -112,7 +112,6 @@ export async function getUserProfile(req, res) {
   res.status(200).json({id, fullName, email});
 }
 
-
 export async function getBusinessMetrics(req, res) {
   const {id} = req.user
   const businessMetrics = await BusinessMetrics.findByPk(id);

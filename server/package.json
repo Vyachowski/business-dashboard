@@ -10,7 +10,7 @@
     "build": "npm i"
   },
   "engines": {
-    "node": ">=20.4.0"
+    "node": "=20.5.1"
   },
   "author": "Slava Haikin",
   "license": "ISC",
