@@ -1,13 +1,13 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import AuthContext from '../../components/AuthContext';
 import LogoDark from '../../images/logo/logo-dark.svg';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import React, {useContext, useState} from 'react';
 import Logo from '../../images/logo/logo.svg';
 
 const SignIn: React.FC = () => {
   const {handleLogin} = useContext(AuthContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [state, setState] = useState({
     email: "selva@mail.ru",
     password: "123",
@@ -29,8 +29,8 @@ const SignIn: React.FC = () => {
 
     if (email && password) {
       try {
-        handleLogin(email, password);
-        navigate('/');
+        await handleLogin(email, password);
+        // navigate('/');
         window.location.reload();
       } catch (error) {
         console.error('Sorry:', error);

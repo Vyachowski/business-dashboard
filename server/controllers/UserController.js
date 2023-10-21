@@ -69,6 +69,7 @@ export async function loginUser(req, res) {
 
   res.cookie('accessToken', accessToken, { httpOnly: true });
   res.cookie('refreshToken', refreshToken, { httpOnly: true });
+  console.log('On sign-in cookies sent!')
   // Server response if successful
   res.status(200).json({ message: 'Login successful' });
 }
@@ -96,7 +97,6 @@ export async function refreshToken(req, res) {
 }
 
 export async function logoutUser(req, res) {
-  res.clearCookie('token');
   res.clearCookie('accessToken');
   res.clearCookie('refreshToken');
   res.status(200).json({ message: 'Logout successful' });
@@ -105,14 +105,22 @@ export async function logoutUser(req, res) {
 export async function getUserProfile(req, res) {
   const {id, email} = req.user;
   const user = await User.findByPk(id);
-  const fullName = user.fullName;
+  const fullName = user?.fullName;
+  if (!fullName) {
+    res.status(404).json({message: "user not found"});
+  }
   res.status(200).json({id, fullName, email});
 }
 
 
 export async function getBusinessMetrics(req, res) {
-  const {id} = req.user;
+  const {id} = req.user
   const businessMetrics = await BusinessMetrics.findByPk(id);
+  console.log(businessMetrics);
+  if (!businessMetrics) {
+    res.status(404).json({message: "Data not found"});
+    return;
+  }
   const {
     totalRevenueGoal,
     ppcRevenueGoal,

@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
           withCredentials: true,
         });
 
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           const { fullName, email, id } = response.data;
           setProfile({ fullName, email, id });
         }
@@ -31,12 +31,15 @@ export function AuthProvider({ children }) {
 
   const handleLogin = async (email, password) => {
     try {
-      await axios.post('http://localhost:3011/api/user/sign-in/', {
+      const response = await axios.post('http://localhost:3011/api/user/sign-in/', {
         email,
         password,
       }, {
         withCredentials: true,
       });
+      if (response.status === 200 || response.status === 201) {
+        console.log(response.data)
+      }
     } catch (error) {
       console.error('Error during login:', error);
     }

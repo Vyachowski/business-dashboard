@@ -1,14 +1,14 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import AuthContext from '../../components/AuthContext';
 import LogoDark from '../../images/logo/logo-dark.svg';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import React, {useContext, useState} from 'react';
 import Logo from '../../images/logo/logo.svg';
 import axios from "axios";
 
 const SignUp: React.FC = () => {
   const {handleLogin} = useContext(AuthContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [state, setState] = useState({
     fullName: "Selva Chaikin",
@@ -42,8 +42,8 @@ const SignUp: React.FC = () => {
         });
 
         if (response.status === 201) {
-          handleLogin(email, password);
-          navigate('/');
+          await handleLogin(email, password);
+          // navigate('/');
           window.location.reload();
         }
       } catch (error) {

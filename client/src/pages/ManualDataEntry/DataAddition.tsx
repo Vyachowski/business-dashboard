@@ -4,16 +4,16 @@ import axios from "axios";
 
 const DataAddition = () => {
   const [revenueState, setRevenueState] = useState({
-    startDate: "2022-10-15",
-    endDate: "2023-10-15",
-    seoRevenuePerPeriod: 100000,
-    ppcRevenuePerPeriod: 100000,
+    startDate: "2021-09-15",
+    endDate: "2022-09-15",
+    seoRevenuePerPeriod: 250000,
+    ppcRevenuePerPeriod: 150000,
   })
 
   const [businessMetricsState, setBusinessMetricsState] = useState({
     totalRevenueGoal: 300000,
-    ppcRevenueGoal: 150000,
-    seoRevenueGoal: 150000,
+    ppcRevenueGoal: 100000,
+    seoRevenueGoal: 200000,
     totalLeadCostGoal: 275,
     ppcLeadCostGoal: 400,
     seoLeadCostGoal: 150,
