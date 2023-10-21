@@ -9,6 +9,9 @@
     "start": "node app.js",
     "build": "npm i"
   },
+  "engines": {
+    "node": ">=20.4.0"
+  },
   "author": "Slava Haikin",
   "license": "ISC",
   "dependencies": {
