@@ -1,8 +1,9 @@
 import React from 'react';
-import ChartSeven from '../../components/Charts/ChartSeven';
-import DataStatsOne from "../../components/DataStats/DataStatsOne.tsx";
-import DataStats from "../../components/DataStats/DataStats.tsx";
-import ChartFour from "../../components/Charts/ChartFour.tsx";
+import RevenueOverview from "../../components/Charts/RevenueOverview.tsx";
+import RevenueStatsGroup from "../../components/DataStats/RevenueStatsGroup.tsx";
+import OverviewKeyMetrics from "../../components/DataStats/OverviewKeyMetrics.tsx";
+import OverviewRevenueTrend from "../../components/Charts/OverviewRevenueTrend.tsx";
+import OverviewLeadsTrend from "../../components/Charts/OverviewLeadsTrend.tsx";
 
 
 const Overview: React.FC = () => {
@@ -18,10 +19,10 @@ const Overview: React.FC = () => {
 
       <div className="mt-7.5 grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <div className="col-span-12 xl:col-span-8">
-          <ChartSeven />
+          <RevenueOverview />
         </div>
         <div className="col-span-12 xl:col-span-4">
-          <DataStatsOne />
+          <RevenueStatsGroup />
         </div>
 
       </div>
@@ -33,7 +34,7 @@ const Overview: React.FC = () => {
           </h2>
         </div>
         <div className="col-span-12">
-          <DataStats />
+          <OverviewKeyMetrics />
         </div>
       </div>
 
@@ -44,7 +45,7 @@ const Overview: React.FC = () => {
           </h2>
         </div>
         <div className="col-span-12">
-          <ChartFour />
+          <OverviewRevenueTrend />
         </div>
       </div>
 
@@ -55,7 +56,7 @@ const Overview: React.FC = () => {
           </h2>
         </div>
         <div className="col-span-12">
-          <ChartFour />
+          <OverviewLeadsTrend />
         </div>
       </div>
     </>

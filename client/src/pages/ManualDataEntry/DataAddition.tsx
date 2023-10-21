@@ -1,7 +1,6 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import {useState} from "react";
 import axios from "axios";
-// import start from "../../components/Start.tsx";
 
 const DataAddition = () => {
   const [revenueState, setRevenueState] = useState({

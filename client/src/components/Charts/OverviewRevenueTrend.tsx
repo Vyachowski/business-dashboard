@@ -1,32 +1,68 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
+import axios from "axios";
 
 interface ChartFourState {
   series: { data: number[] }[];
 }
 
-const ChartFour: React.FC = () => {
+const RevenueTrendChart: React.FC = () => {
+  const [revenueState, setRevenueState] = useState([]);
   const [state, setState] = useState<ChartFourState>({
     series: [
       {
-        data: [
-          168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112, 123, 212,
-          270, 190, 310, 115, 90, 380, 112, 223, 292, 170, 290, 110, 115, 290,
-          380, 312,
-        ],
+        data: revenueState,
       },
     ],
   });
 
-  // Update the state
-  const updateState = () => {
-    setState((prevState) => ({
-      ...prevState,
-      // Update the desired properties
-    }));
-  };
-  updateState;
+  useEffect(() => {
+    const getDaysInMonth = (year, month) => {
+      return new Date(year, month + 1, 0).getDate();
+    };
+
+    const fetchData = async (startDate, endDate, setRevenueState) => {
+      try {
+        const response = await axios.get("http://localhost:3011/api/revenue/", {
+          params: {
+            startDate,
+            endDate,
+            type: "daily",
+          },
+          withCredentials: true,
+        });
+
+        const daysInMonth = getDaysInMonth(
+          new Date(startDate).getFullYear(),
+          new Date(startDate).getMonth()
+        );
+        const monthlyRevenueData = new Array(daysInMonth).fill(0);
+
+        response.data.result.forEach((item) => {
+          const itemDate = new Date(item.date);
+          const dayOfMonth = itemDate.getDate() - 1; // Subtract 1 to match array index
+          monthlyRevenueData[dayOfMonth] += item.profit;
+        });
+
+        setRevenueState(monthlyRevenueData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData('2023-09-01', '2023-09-30', setRevenueState);
+  }, []);
+
+  useEffect(() => {
+    setState({
+      series: [
+        {
+          data: revenueState,
+        },
+      ],
+    });
+  }, [revenueState]);
 
   const options: ApexOptions = {
     colors: ['#3C50E0'],
@@ -152,4 +188,4 @@ const ChartFour: React.FC = () => {
   );
 };
 
-export default ChartFour;
+export default RevenueTrendChart;

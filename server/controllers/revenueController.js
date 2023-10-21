@@ -91,6 +91,49 @@ export async function getPPCRevenueByPeriod(req, res) {
   }
 }
 
+export async function getRevenueByPeriod(req, res) {
+  try {
+    const { startDate, endDate, type } = req.query;
+    const { id } = req.user;
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({ error: 'Please, define a period of time.' });
+    }
+
+    const formattedStartDate = new Date(startDate);
+    const formattedEndDate = new Date(endDate);
+
+    let result;
+
+    if (type === 'total') {
+      result = await Revenue.sum('profit', {
+        where: {
+          date: {
+            [Op.between]: [formattedStartDate, formattedEndDate],
+          },
+          userId: id,
+        },
+      });
+    } else if (type === 'daily') {
+      result = await Revenue.findAll({
+        where: {
+          date: {
+            [Op.between]: [formattedStartDate, formattedEndDate],
+          },
+          userId: id,
+        },
+      });
+    } else {
+      return res.status(400).json({ error: 'Invalid type parameter. Use "total" or "daily".' });
+    }
+
+    res.json({ result });
+  } catch (error) {
+    console.error('Error while handling request:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+}
+
 export async function postRevenueByPeriod(req, res) {
   const { id } = req.user;
   const { startDate, endDate, seoRevenuePerPeriod, ppcRevenuePerPeriod } = req.body;

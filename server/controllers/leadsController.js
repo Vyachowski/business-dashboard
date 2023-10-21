@@ -1,4 +1,3 @@
-import sequelize from "../config/database.js";
 import Lead from '../models/LeadModel.js';
 import { Op } from "sequelize";
 
@@ -64,7 +63,25 @@ export async function postLeadsByPeriod(req, res) {
     console.log('Successfully updated.');
   } catch (error) {
     console.error('Error while adding data:', error);
-  } finally {
-    await sequelize.close();
+  }
+}
+
+function getRandomAmount(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export async function generateRandomLeads() {
+  const startDate = new Date('2021-01-01');
+  const endDate = new Date('2023-10-20');
+
+  try {
+    for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+      const amount = getRandomAmount(100, 1000); // Генерация случайного значения прибыли от 100 до 1000
+      await Lead.create({ date: currentDate, amount, currency: 'Rub' });
+      console.log(`Added: Date: ${currentDate}, Amount: ${amount}, Currency: Rub`);
+    }
+    console.log('Random data generation completed.');
+  } catch (error) {
+    console.error('Error while adding random data:', error);
   }
 }

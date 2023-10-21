@@ -12,10 +12,20 @@ const Lead = sequelize.define('Lead', {
       msg: 'Date must be unique per user'
     }
   },
-  profit: {
+  amount: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
+  // source: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     isIn: {
+  //       args: [['SEO', 'PPC']],
+  //       msg: "Source must be either 'SEO' or 'PPC'"
+  //     }
+  //   }
+  // },
   currency: {
     type: DataTypes.STRING,
     allowNull: false
