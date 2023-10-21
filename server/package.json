@@ -9,7 +9,7 @@
     "start": "node app.js",
     "build": "npm i"
   },
-  "author": "",
+  "author": "Slava Haikin",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
