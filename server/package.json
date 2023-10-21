@@ -2,7 +2,7 @@
   "name": "business-dashboard-server",
   "version": "1.0.0",
   "description": "A server part of dashboard for small business with a PPC and SEO marketing channels",
-  "main": "index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
