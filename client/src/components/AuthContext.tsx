@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from 'react';
 import axios from "axios";
+import 'dotenv/config';
 
 const AuthContext = createContext(null);
 
@@ -13,7 +14,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3011/api/user/profile', {
+        const response = await axios.get(`${process.env.BACKEND_LINK}/api/user/profile`, {
           withCredentials: true,
         });
 
@@ -31,7 +32,7 @@ export function AuthProvider({ children }) {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:3011/api/user/sign-in/', {
+      const response = await axios.post(`${process.env.BACKEND_LINK}/api/user/sign-in/`, {
         email,
         password,
       }, {
@@ -47,7 +48,7 @@ export function AuthProvider({ children }) {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:3011/api/user/sign-out/', null, {
+      await axios.post(`${process.env.BACKEND_LINK}/api/user/sign-out/`, null, {
         withCredentials: true,
       });
 
