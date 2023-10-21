@@ -34,7 +34,7 @@ export async function getLeadsByPeriod(req, res) {
       return res.status(400).json({ error: 'Invalid type parameter. Use "total" or "daily".' });
     }
 
-    res.json({ result });
+    res.status(200).json({ result });
   } catch (error) {
     console.error('Error while handling request:', error);
     res.status(500).json({ error: 'Internal server error.' });
@@ -70,9 +70,9 @@ function getRandomAmount(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export async function generateRandomLeads() {
+export async function generateRandomLeads(req, res) {
   const startDate = new Date('2021-01-01');
-  const endDate = new Date('2023-10-20');
+  const endDate = new Date('2023-10-20')
 
   try {
     for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
@@ -81,6 +81,7 @@ export async function generateRandomLeads() {
       console.log(`Added: Date: ${currentDate}, Amount: ${amount}, Currency: Rub`);
     }
     console.log('Random data generation completed.');
+    res.status(200).json({ message: "Random data generation completed." });
   } catch (error) {
     console.error('Error while adding random data:', error);
   }
