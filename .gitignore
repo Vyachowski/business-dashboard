@@ -1,3 +1,7 @@
+# Docs
+
+PROJECT.md
+
 # npm
 node_modules
 package-lock.json
@@ -13,7 +17,6 @@ benchmarks/graphs
 
 # React and other
 .DS_STORE
-node_modules
 scripts/flow/*/.flowconfig
 .flowconfig
 *~
@@ -38,6 +41,9 @@ chrome-user-data
 *.swp
 *.swo
 .env
+*.sqlite
+*.sqlite3
+*.db
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
