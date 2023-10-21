@@ -2,6 +2,8 @@ import { lazy, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Overview from './pages/Dashboard/Overview';
+import SeoOverview from './pages/Dashboard/SeoOverview.tsx';
+import PpcOverview from './pages/Dashboard/PpcOverview.tsx';
 import InsightTaskList from './pages/Task/InsightTaskList.tsx';
 import DataAddition from './pages/ManualDataEntry/DataAddition';
 import ErrorPage from './pages/Pages/ErrorPage';
@@ -36,6 +38,24 @@ function App() {
                             </>
                         }
                     />
+                    <Route
+                      path="/dashboard/seo-traffic"
+                      element={
+                        <>
+                          <PageTitle title="SEO Overview Dashboard | Insightful - Tailwind CSS Admin Dashboard Template" />
+                          <SeoOverview />
+                        </>
+                      }
+                    />
+                  <Route
+                    path="/dashboard/ppc-traffic"
+                    element={
+                      <>
+                        <PageTitle title="PPC Overview Dashboard | Insightful - Tailwind CSS Admin Dashboard Template" />
+                        <PpcOverview />
+                      </>
+                    }
+                  />
                     <Route
                         path="/activities/insight-task-list"
                         element={
