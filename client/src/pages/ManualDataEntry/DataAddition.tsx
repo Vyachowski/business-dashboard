@@ -5,8 +5,8 @@ import axios from "axios";
 
 const DataAddition = () => {
   const [revenueState, setRevenueState] = useState({
-    startDate: "2022-02-15",
-    endDate: "2023-02-15",
+    startDate: "2022-10-15",
+    endDate: "2023-10-15",
     seoRevenuePerPeriod: 100000,
     ppcRevenuePerPeriod: 100000,
   })
@@ -44,7 +44,7 @@ const DataAddition = () => {
     const startDate = formData.get('startDate');
     const endDate = formData.get('endDate');
     const seoRevenuePerPeriod = formData.get('seoRevenuePerPeriod');
-    const ppcRevenuePerPeriod = formData.get('ppcReoRevenuePerPeriod');
+    const ppcRevenuePerPeriod = formData.get('ppcRevenuePerPeriod');
 
     try {
       const response = await axios.post(
@@ -61,7 +61,7 @@ const DataAddition = () => {
       );
 
       if (response.status === 201) {
-        console.log('Revenue data was successfully added')
+        console.log('Revenue data was successfully added', seoRevenuePerPeriod, ppcRevenuePerPeriod)
       }
     } catch (error) {
       console.error('Sorry, there was an error during revenue data addition:', error);
@@ -164,12 +164,12 @@ const DataAddition = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="180 000"
+                    placeholder="100 000"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     id="data_addition-income-sum"
                     value={revenueState.seoRevenuePerPeriod}
                     onChange={handleRevenueInputChange}
-                    name="revenuePerPeriod"
+                    name="seoRevenuePerPeriod"
                   />
                 </div>
 
@@ -182,12 +182,12 @@ const DataAddition = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="180 000"
+                    placeholder="100 000"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     id="data_addition-income-sum"
                     value={revenueState.ppcRevenuePerPeriod}
                     onChange={handleRevenueInputChange}
-                    name="revenuePerPeriod"
+                    name="ppcRevenuePerPeriod"
                   />
                 </div>
 
