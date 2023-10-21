@@ -11,9 +11,9 @@ const DataAddition = () => {
   })
 
   const [businessMetricsState, setBusinessMetricsState] = useState({
-    totalRevenueGoal: 300000,
-    ppcRevenueGoal: 100000,
-    seoRevenueGoal: 200000,
+    totalRevenueGoal: 650000,
+    ppcRevenueGoal: 300000,
+    seoRevenueGoal: 350000,
     totalLeadCostGoal: 275,
     ppcLeadCostGoal: 400,
     seoLeadCostGoal: 150,
@@ -59,7 +59,7 @@ const DataAddition = () => {
         }
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log('Revenue data was successfully added', seoRevenuePerPeriod, ppcRevenuePerPeriod)
       }
     } catch (error) {
@@ -97,7 +97,7 @@ const DataAddition = () => {
           withCredentials: true,
         }
       );
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log('Business metrics data was successfully added')
       }
     } catch (error) {

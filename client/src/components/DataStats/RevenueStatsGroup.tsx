@@ -23,7 +23,7 @@ const DataStatsThree: React.FC = () => {
 
         const {totalRevenueGoal} = response.data;
 
-        const responseRevenue = await axios.get('http://localhost:3011/api/revenue/', {
+        const yearlyResponseRevenue = await axios.get('http://localhost:3011/api/revenue/', {
           params: {
             startDate: '2022-10-16',
             endDate: '2023-10-15',
@@ -32,18 +32,40 @@ const DataStatsThree: React.FC = () => {
           withCredentials: true,
         });
 
-        const {result} = responseRevenue.data;
+        const yearlyResult = yearlyResponseRevenue.data.result;
+
+        const monthlyResponseRevenue = await axios.get('http://localhost:3011/api/revenue/', {
+          params: {
+            startDate: '2023-09-15',
+            endDate: '2023-10-15',
+            type: 'total',
+          },
+          withCredentials: true,
+        });
+
+        const monthlyResult = monthlyResponseRevenue.data.result;
+
+        const weeklyResponseRevenue = await axios.get('http://localhost:3011/api/revenue/', {
+          params: {
+            startDate: '2022-10-8',
+            endDate: '2023-10-15',
+            type: 'total',
+          },
+          withCredentials: true,
+        });
+
+        const weeklyResult = weeklyResponseRevenue.data.result;
 
         setGoals({
           annualGoal: totalRevenueGoal,
-          monthlyGoal: totalRevenueGoal / 12,
+          monthlyGoal: Math.floor(totalRevenueGoal / 12),
           weeklyGoal: Math.floor(totalRevenueGoal / 52),
         })
 
         setRevenue({
-          annualRevenue: result,
-          monthlyRevenue: result / 12,
-          weeklyRevenue: Math.floor(result / 52),
+          annualRevenue: Math.floor(yearlyResult),
+          monthlyRevenue: Math.floor(monthlyResult),
+          weeklyRevenue: Math.floor(weeklyResult),
         })
       } catch (error) {
         console.error('Error fetching data:', error);

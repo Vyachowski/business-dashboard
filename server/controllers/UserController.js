@@ -116,7 +116,7 @@ export async function getUserProfile(req, res) {
 export async function getBusinessMetrics(req, res) {
   const {id} = req.user
   const businessMetrics = await BusinessMetrics.findByPk(id);
-  console.log(businessMetrics);
+
   if (!businessMetrics) {
     res.status(404).json({message: "Data not found"});
     return;
@@ -171,7 +171,7 @@ export async function addBusinessMetrics(req, res) {
     ppcLeadAmountGoal,
     seoLeadAmountGoal,
   }).then((businessMetric) => {
-    console.log('New business metrics record created:', businessMetric);
+    console.log('New business metrics record created:', businessMetric.dataValues);
   }).catch((error) => {
     console.error('Error while creating business metrics record:', error);
   });

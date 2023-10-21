@@ -43,6 +43,7 @@ export async function getLeadsByPeriod(req, res) {
 
 export async function postLeadsByPeriod(req, res) {
   const {startDate, endDate, profit} = req.body;
+  const {id} = req.user;
 
   if (!startDate || !endDate) {
     return res.status(400).json({error: 'Please, define a period of time.'});
@@ -57,7 +58,7 @@ export async function postLeadsByPeriod(req, res) {
 
   try {
     for (let currentDate = formattedStartDate; currentDate <= formattedEndDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      await Lead.create({date: currentDate, profit: profitPerDay, currency: 'Rub'});
+      await Lead.create({date: currentDate, profit: profitPerDay, currency: 'Rub', userId: id});
       console.log(`Added: Date: ${currentDate}, Profit: ${profitPerDay}, Currency: Rub`);
     }
     console.log('Successfully updated.');
@@ -76,7 +77,7 @@ export async function generateRandomLeads(req, res) {
 
   try {
     for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      const amount = getRandomAmount(100, 1000); // Генерация случайного значения прибыли от 100 до 1000
+      const amount = getRandomAmount(35, 98);
       await Lead.create({ date: currentDate, amount, currency: 'Rub' });
       console.log(`Added: Date: ${currentDate}, Amount: ${amount}, Currency: Rub`);
     }

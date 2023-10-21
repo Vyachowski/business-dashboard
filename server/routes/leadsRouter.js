@@ -8,7 +8,7 @@ const router = express.Router();
 // Middleware for parsing JSON requests
 router.use(bodyParser.json());
 
-router.get('/create/', authMiddleware, generateRandomLeads)
+router.get('/create/', authMiddleware, generateRandomLeads);
 router.get('/', authMiddleware, getLeadsByPeriod);
 router.post('/', authMiddleware, postLeadsByPeriod);
 

@@ -24,7 +24,7 @@ const RevenueTrendChart: React.FC = () => {
 
     const fetchData = async (startDate, endDate, setLeadsState) => {
       try {
-        const response = await axios.get("http://localhost:3011/api/leads/SEO/", {
+        const response = await axios.get("http://localhost:3011/api/leads/", {
           params: {
             startDate,
             endDate,
