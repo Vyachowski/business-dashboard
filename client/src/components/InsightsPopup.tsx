@@ -102,7 +102,7 @@ const InsightsPopup: React.FC<InsightsPopupProps> = (props) => {
                 </clipPath>
               </defs>
             </svg>
-            Add task
+            Add insight
           </button>
         </form>
       </div>
