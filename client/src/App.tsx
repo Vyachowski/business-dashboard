@@ -15,7 +15,7 @@ import PageTitle from './components/PageTitle';
 import Integrations from "./pages/Integrations.tsx";
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
-export const baseUrl = 'http://localhost:3011';
+export const baseUrl = 'https://business-dahboard-client.onrender.com';
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
 
