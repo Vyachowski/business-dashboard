@@ -2,6 +2,7 @@ import {ApexOptions} from 'apexcharts';
 import React, {useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from "axios";
+import {baseUrl} from "../../App.tsx";
 
 interface ChartSevenState {
   series: {
@@ -59,7 +60,7 @@ const ChartSeven: React.FC = () => {
   useEffect(() => {
     const fetchData = async (startDate, endDate, setRevenueState) => {
       try {
-        const response = await axios.get('http://localhost:3011/api/revenue/', {
+        const response = await axios.get(`${baseUrl}/api/revenue/`, {
           params: {
             startDate,
             endDate,

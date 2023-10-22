@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {baseUrl} from "../App.tsx";
 
 interface TaskPopupProps {
   popupOpen: boolean;
@@ -12,7 +13,7 @@ const TaskPopup: React.FC<TaskPopupProps> = (props) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3011/api/activities/tasks/', {
+      const response = await axios.post(`${baseUrl}/api/activities/tasks/`, {
         taskDescription: taskDescription
       }, {
         withCredentials: true

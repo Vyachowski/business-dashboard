@@ -1,6 +1,7 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import {useState} from "react";
 import axios from "axios";
+import {baseUrl} from "../../App.tsx";
 
 const DataAddition = () => {
   const [revenueState, setRevenueState] = useState({
@@ -47,7 +48,7 @@ const DataAddition = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3011/api/revenue/',
+        `${baseUrl}/api/revenue/`,
         {
           startDate,
           endDate,
@@ -81,7 +82,7 @@ const DataAddition = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3011/api/user/business-metrics/',
+        `${baseUrl}/api/user/business-metrics/`,
         {
           totalRevenueGoal,
           ppcRevenueGoal,

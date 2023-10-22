@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import React, {useContext, useState} from 'react';
 import Logo from '../../images/logo/logo.svg';
 import axios from "axios";
-import 'dotenv/config';
+import {baseUrl} from "../../App.tsx";
 
 const SignUp: React.FC = () => {
   const {handleLogin} = useContext(AuthContext);
@@ -35,7 +35,7 @@ const SignUp: React.FC = () => {
 
     if (password === passwordConfirmation) {
       try {
-        const response = await axios.post(`${process.env.BACKEND_LINK}/api/user/sign-up/`, {
+        const response = await axios.post(`${baseUrl}/api/user/sign-up/`, {
           fullName: fullName,
           email: email,
           password: password,

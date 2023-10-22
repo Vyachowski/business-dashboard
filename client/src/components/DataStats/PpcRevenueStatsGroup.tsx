@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {baseUrl} from "../../App.tsx";
 
 const DataStatsThree: React.FC = () => {
   const [goals, setGoals] = useState({
@@ -17,13 +18,13 @@ const DataStatsThree: React.FC = () => {
   useEffect(() => {
     const fetchGoalsData = async () => {
       try {
-        const response = await axios.get('http://localhost:3011/api/user/business-metrics/', {
+        const response = await axios.get(`${baseUrl}/api/user/business-metrics/`, {
           withCredentials: true,
         });
 
         const {ppcRevenueGoal} = response.data;
 
-        const yearlyResponseRevenue = await axios.get('http://localhost:3011/api/revenue/PPC/', {
+        const yearlyResponseRevenue = await axios.get(`${baseUrl}/api/revenue/PPC/`, {
           params: {
             startDate: '2022-10-16',
             endDate: '2023-10-15',
@@ -34,7 +35,7 @@ const DataStatsThree: React.FC = () => {
 
         const yearlyResult = yearlyResponseRevenue.data.result;
 
-        const monthlyResponseRevenue = await axios.get('http://localhost:3011/api/revenue/PPC/', {
+        const monthlyResponseRevenue = await axios.get(`${baseUrl}/api/revenue/PPC/`, {
           params: {
             startDate: '2023-09-15',
             endDate: '2023-10-15',
@@ -45,7 +46,7 @@ const DataStatsThree: React.FC = () => {
 
         const monthlyResult = monthlyResponseRevenue.data.result;
 
-        const weeklyResponseRevenue = await axios.get('http://localhost:3011/api/revenue/PPC/', {
+        const weeklyResponseRevenue = await axios.get(`${baseUrl}/api/revenue/PPC/`, {
           params: {
             startDate: '2022-10-8',
             endDate: '2023-10-15',

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {baseUrl} from "../App.tsx";
 
 interface InsightsPopupProps {
   popupOpen: boolean;
@@ -12,7 +13,7 @@ const InsightsPopup: React.FC<InsightsPopupProps> = (props) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3011/api/activities/insights/', {
+      const response = await axios.post(`${baseUrl}/api/activities/insights/`, {
         insightDescription: insightDescription
       }, {
         withCredentials: true
@@ -102,7 +103,7 @@ const InsightsPopup: React.FC<InsightsPopupProps> = (props) => {
                 </clipPath>
               </defs>
             </svg>
-            Add task
+            Add insight
           </button>
         </form>
       </div>

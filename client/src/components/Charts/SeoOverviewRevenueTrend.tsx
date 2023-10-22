@@ -2,6 +2,7 @@ import { ApexOptions } from 'apexcharts';
 import React, {useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
 import axios from "axios";
+import {baseUrl} from "../../App.tsx";
 
 interface ChartFourState {
   series: { data: number[] }[];
@@ -24,7 +25,7 @@ const RevenueTrendChart: React.FC = () => {
 
     const fetchData = async (startDate, endDate, setRevenueState) => {
       try {
-        const response = await axios.get("http://localhost:3011/api/revenue/SEO/", {
+        const response = await axios.get(`${baseUrl}/api/revenue/SEO/`, {
           params: {
             startDate,
             endDate,
